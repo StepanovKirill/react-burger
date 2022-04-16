@@ -1,0 +1,27 @@
+.btn {
+    box-sizing: border-box;
+    height: 56px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    border-radius: 28px;
+    cursor: pointer;
+}
+
+.text {
+    font-size: 16px;
+    line-height: 56px;
+    font-variant: regular;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    margin: 0 8px 0 0;
+}
+
+.active {
+    color: var(--color-text-standart);
+}

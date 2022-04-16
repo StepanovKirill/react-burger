@@ -1,0 +1,32 @@
+.header_container {
+    background-color: var(--color-interface-modal-bg);
+    width: 100%;
+    height: 88px;
+    display: flex;
+    justify-content: center;
+}
+
+.header {
+    height: 100%;
+    width: 1280px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    position: absolute;
+    left: calc(50% - 145px);
+}
+
+.container {
+    display: flex;
+}
+
+@media (max-width:1280px) {
+    .logo {
+        position: relative;
+        left: auto;
+        margin: auto;
+    }
+}
