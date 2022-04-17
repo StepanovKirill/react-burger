@@ -1,0 +1,7 @@
+.container {
+    width: 600px;
+    height: 100%;
+    border: 1px blanchedalmond solid;
+    display: flex;
+    flex-direction: column;
+}

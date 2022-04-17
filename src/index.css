@@ -9,5 +9,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    border-radius: 0;
     background-color: var(--interface-bg);
+    overflow-y: hidden;
 }

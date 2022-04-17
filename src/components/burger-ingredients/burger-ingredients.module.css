@@ -1,0 +1,37 @@
+.container {
+    width: 600px;
+}
+
+.title_container {
+    margin: 40px 0 20px;
+}
+
+.title_text {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+    letter-spacing: 0em;
+    text-align: left;
+}
+
+.tab {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.scrolled {
+    overflow-y: scroll;
+    height: calc(100vh - 284px);
+}
+
+.scrolled::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrolled::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.scrolled::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
