@@ -1,4 +1,5 @@
 import {React, useState} from 'react';
+import PropTypes from 'prop-types'
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
@@ -30,6 +31,17 @@ function BurgerIngredients(props) {
     </div>
     </section>
   );
+}
+
+BurgerIngredients.propTypes = {
+  ingredients: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    count: PropTypes.number,
+    image: PropTypes.string,
+    type: PropTypes.string
+  })),
 }
 
 export default BurgerIngredients;

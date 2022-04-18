@@ -5,6 +5,8 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 
 
 function IngredientCard(props) {
+
+  console.log(props)
   return (
     <div className={style.container}>
       <div className={style.image_container}>
@@ -29,14 +31,15 @@ function IngredientCard(props) {
     </div>
   );
 }
-/*
+
 IngredientCard.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string,
     price: PropTypes.number,
     count: PropTypes.number,
     image: PropTypes.string
-  })
+  }),
+  count: PropTypes.number
 }
-*/
+
 export default IngredientCard;

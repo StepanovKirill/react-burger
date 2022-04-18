@@ -5,7 +5,6 @@ import style from './ingredients-tab.module.css'
 
 function IngredientTab(props) {
     const names = {bun: "Булки", main: "Начинки", sauce: "Соусы"}
-
     return (
     <section>
       <div className={style.tab_name}>
@@ -17,9 +16,10 @@ function IngredientTab(props) {
     </section>
     )
 }
-/*
+
 IngredientTab.propTypes = {
-  props: PropTypes.arrayOf(
+  name: PropTypes.string,
+  ingredients: PropTypes.arrayOf(
     PropTypes.shape({
     _id: PropTypes.string,
     name: PropTypes.string,
@@ -28,5 +28,5 @@ IngredientTab.propTypes = {
     image: PropTypes.string
   }))
 }
-*/
+
 export default IngredientTab

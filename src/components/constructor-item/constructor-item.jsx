@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import style from'./constructor-item.module.css'
 import {CurrencyIcon, LockIcon, DragIcon, DeleteIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -33,6 +34,17 @@ function ConstructorItem(props) {
     </div>
     </div>
   )
+}
+
+ConstructorItem.propTypes = {
+  data: PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    count: PropTypes.number,
+    image: PropTypes.string,
+    type: PropTypes.string
+  }),
 }
 
 export default ConstructorItem

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import style from'./burger-constructor.module.css'
 import ConstructorItem from '../constructor-item/constructor-item';
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
@@ -27,6 +28,17 @@ function BurgerConstructor(props) {
       </div>
     </div>
   );
+}
+
+BurgerConstructor.propTypes = {
+  composition: PropTypes.arrayOf(PropTypes.shape({
+    _id: PropTypes.string,
+    name: PropTypes.string,
+    price: PropTypes.number,
+    count: PropTypes.number,
+    image: PropTypes.string,
+    type: PropTypes.string
+  })),
 }
 
 export default BurgerConstructor;
