@@ -5,18 +5,19 @@ import style from './ingredients-tab.module.css'
 
 function IngredientTab(props) {
     const names = {bun: "Булки", main: "Начинки", sauce: "Соусы"}
+
     return (
     <section>
       <div className={style.tab_name}>
-      <p className="text text_type_main-medium">{names[props.name]}</p>
+        <p className="text text_type_main-medium">{names[props.name]}</p>
       </div>
       <div className={style.two_column}>
-      {props.data.map((item, index) => (<IngredientCard key={index} data={item} count={item.count}/>))}
+        {props.ingredients.map((item, index) => (<IngredientCard key={index} data={item} count={item.count}/>))}
       </div>
     </section>
     )
 }
-
+/*
 IngredientTab.propTypes = {
   props: PropTypes.arrayOf(
     PropTypes.shape({
@@ -27,5 +28,5 @@ IngredientTab.propTypes = {
     image: PropTypes.string
   }))
 }
-
+*/
 export default IngredientTab

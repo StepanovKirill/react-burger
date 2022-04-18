@@ -2,15 +2,11 @@ import {React, useState} from 'react';
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
-import data from '../../utils/data.js'
 
-function BurgerIngredients() {
+function BurgerIngredients(props) {
   // стейт для таба
   const [current, setCurrent] = useState('bun')
 
-  // стейт для ингредиентов и счетчика
-  const [ingredients, setIngredients] = useState(groupData(data))
-  console.log(ingredients.bun)
   return (
     <section className={style.container}>
       <div className={style.title_container}>
@@ -28,20 +24,12 @@ function BurgerIngredients() {
       </Tab>
     </div>
     <div className={style.scrolled}>
-      <IngredientsTab key='1' data={ingredients.bun} name='bun' />
-      <IngredientsTab key='3' data={ingredients.sauce} name='sauce' />
-      <IngredientsTab key='2' data={ingredients.main} name='main' />
+      <IngredientsTab key='1' ingredients={props.ingredients.filter((item) => item.type === 'bun')} name='bun' />
+      <IngredientsTab key='3' ingredients={props.ingredients.filter((item) => item.type === 'sauce')} name='sauce' />
+      <IngredientsTab key='2' ingredients={props.ingredients.filter((item) => item.type === 'main')} name='main' />
     </div>
     </section>
   );
-}
-
-function groupData(data) {
-  // группирует данные по типам: булки, соусы, начинки
-
-  let res = {bun: [], sauce: [], main: []}
-  data.forEach((item) => {res[item['type']].push({...item, 'count': 1})})
-  return res
 }
 
 export default BurgerIngredients;

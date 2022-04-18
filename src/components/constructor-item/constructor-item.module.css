@@ -1,0 +1,86 @@
+.container_ {
+    width: 568px;
+    height: 80px;
+    margin: 0 8px 16px auto;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-interface-modal-bg);
+    border-radius: 40px;
+    margin-left: 8px;
+}
+
+.ingredient_icon {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    margin: 0 20px 0 24px;
+}
+
+.ingredient_icon>img {
+    display: flex;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+}
+
+.text_container {
+    max-width: 254px;
+    height: 48px;
+    margin-right: auto;
+}
+
+.text {
+    text-align: left;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.price_container {
+    height: 24px;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.price_value {
+    margin: 0 8px 0 0;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status_icon {
+    composes: icon;
+    margin-right: 32px;
+}
+
+.first {
+    composes: container;
+    margin-right: 8px;
+    margin-left: 0px;
+    display: flex;
+    align-items: center;
+    border-radius: 88px 88px 40px 40px;
+}
+
+.last {
+    composes: container;
+    margin-right: 8px;
+    margin-left: 0px;
+    display: flex;
+    align-items: center;
+    border-radius: 40px 40px 88px 88px;
+}

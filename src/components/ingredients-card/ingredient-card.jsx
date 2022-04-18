@@ -29,7 +29,7 @@ function IngredientCard(props) {
     </div>
   );
 }
-
+/*
 IngredientCard.propTypes = {
   data: PropTypes.shape({
     name: PropTypes.string,
@@ -38,5 +38,5 @@ IngredientCard.propTypes = {
     image: PropTypes.string
   })
 }
-
+*/
 export default IngredientCard;
