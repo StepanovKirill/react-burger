@@ -1,12 +1,11 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
+import ingredient from '../../utils/types';
 import style from'./ingredient-card.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
-
 function IngredientCard(props) {
 
-  console.log(props)
   return (
     <div className={style.container}>
       <div className={style.image_container}>
@@ -33,12 +32,7 @@ function IngredientCard(props) {
 }
 
 IngredientCard.propTypes = {
-  data: PropTypes.shape({
-    name: PropTypes.string,
-    price: PropTypes.number,
-    count: PropTypes.number,
-    image: PropTypes.string
-  }),
+  data: ingredient.isRequired,
   count: PropTypes.number
 }
 
