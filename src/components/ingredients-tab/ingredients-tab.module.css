@@ -1,0 +1,11 @@
+.two_column {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 0 8px 0 16px;
+}
+
+.tab_name {
+    margin-bottom: 24px;
+}

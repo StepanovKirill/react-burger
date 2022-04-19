@@ -1,0 +1,61 @@
+.container {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.scrolled {
+    overflow-y: scroll;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 16px 0;
+    gap: 16px 0;
+    height: calc(100vh - 536px);
+    width: 100%;
+}
+
+.scrolled::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scrolled::-webkit-scrollbar-track {
+    background: #2F2F37;
+}
+
+.scrolled::-webkit-scrollbar-thumb {
+    background: #8585AD;
+}
+
+.scrolled:last-child {
+    margin-bottom: 0;
+}
+
+.total_container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 64px;
+    margin-top: 24px;
+    margin-right: 16px;
+}
+
+.price_value {
+    margin-right: 8px;
+}
+
+.currency_container {
+    margin-right: 40px;
+}
+
+.currency_container>svg {
+    width: 36px;
+    height: 36px;
+}
