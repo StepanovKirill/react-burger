@@ -1,11 +1,14 @@
-import React from 'react';
+import {React, useState} from 'react';
 import style from'./burger-constructor.module.css'
 import ConstructorItem from '../constructor-item/constructor-item';
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
 import ingredient from '../../utils/types';
+import OrderAcceptedPopup from '../order-accepted-popup/order-accepted-popup';
 
 function BurgerConstructor(props) {
+
+  const [accepted, setAccept] = useState(false)
   return (
     <div className={style.container}>
       {props.composition.filter((item) => item.type === 'bun')
@@ -25,9 +28,11 @@ function BurgerConstructor(props) {
         <div className={style.currency_container}>
           <CurrencyIcon/>
         </div>
-        <Button type="primary" size="large">Оформить заказ</Button>
+        <Button type="primary" size="large" onClick={() => {setAccept(true)}}>Оформить заказ</Button>
       </div>
+      {accepted && <OrderAcceptedPopup title='Детали ингридента' close={() => {setAccept(false)}}/>}
     </div>
+
   );
 }
 

@@ -4,14 +4,19 @@ import PropTypes from 'prop-types'
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
+import IngredientInfoPopup from '../ingredient-info-popup/ingredient-info-popup';
+import data from "../../utils/data.js"
+
+const ingr = data[2]
 
 function BurgerIngredients(props) {
   // стейт для таба
   const [current, setCurrent] = useState('bun')
+	const [openPopup, setPopup] = useState(false)
 
   return (
     <section className={style.container}>
-      <div className={style.title_container}>
+      <div className={style.title_container} onClick={() => {setPopup(true)}}>
         <p className={`text text_type_main-large ${style.title_text}`}>Соберите бургер</p>
       </div>
       <div className={style.tab}>
@@ -30,6 +35,7 @@ function BurgerIngredients(props) {
       <IngredientsTab key='3' ingredients={props.ingredients.filter((item) => item.type === 'sauce')} name='sauce' />
       <IngredientsTab key='2' ingredients={props.ingredients.filter((item) => item.type === 'main')} name='main' />
     </div>
+    {openPopup && <IngredientInfoPopup ingredient={ingr} close={() => {setPopup(false)}}/>}
     </section>
   );
 }
