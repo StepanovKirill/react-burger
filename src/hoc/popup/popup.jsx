@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import {CloseIcon} from '@ya.praktikum/react-developer-burger-ui-components'
 import style from './popup.module.css';
 
@@ -19,6 +20,11 @@ function Popup(props){
       </div>
     </div>
   )
+}
+
+Popup.propTypes = {
+  title: PropTypes.string,
+  close: PropTypes.func.isRequired
 }
 
 export default Popup

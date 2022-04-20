@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import style from './order-accepted-popup.module.css'
 import Popup from "../../hoc/popup/popup";
 import {ReactComponent as DoneIcon} from '../../images/done.svg'
@@ -31,6 +32,10 @@ function OrderAcceptedPopup(props) {
         </div>
     </Popup>
     )
+}
+
+OrderAcceptedPopup.propTypes = {
+  close: PropTypes.func.isRequired
 }
 
 export default OrderAcceptedPopup
