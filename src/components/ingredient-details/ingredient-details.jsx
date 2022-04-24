@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from 'prop-types'
-import style from './ingredient-info-popup.module.css'
-import Popup from "../../hoc/popup/popup"
+import style from './ingredient-details.module.css'
 import ingredient from "../../utils/types.js";
 
-function IngredientInfoPopup(props) {
+function IngredientDetails(props) {
   return (
     <>
-    <Popup title="Детали ингредиента" close={props.close}>
       <div className={style.image_container}>
         <img src={props.ingredient.image_large} alt={props.ingredient.name}></img>
       </div>
@@ -50,14 +48,12 @@ function IngredientInfoPopup(props) {
           </p>
         </div>
       </div>
-    </Popup>
     </>
   )
 }
 
-IngredientInfoPopup.propTypes = {
+IngredientDetails.propTypes = {
   ingredient: ingredient.isRequired,
-  close: PropTypes.func.isRequired
 }
 
-export default IngredientInfoPopup
+export default IngredientDetails

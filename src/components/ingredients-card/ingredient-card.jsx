@@ -5,9 +5,9 @@ import style from'./ingredient-card.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
 
 function IngredientCard(props) {
-
+  const onClick = props.onModalOpen
   return (
-    <div className={style.container}>
+    <div className={style.container} onClick={() => {props.onModalOpen(props.data._id)}}>
       <div className={style.image_container}>
         <img src={props.data.image} alt={props.data.name} />
         <div className={style.counter}>

@@ -4,11 +4,10 @@ import ConstructorItem from '../constructor-item/constructor-item';
 import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
 import ingredient from '../../utils/types';
-import OrderAcceptedPopup from '../order-accepted-popup/order-accepted-popup';
 
 function BurgerConstructor(props) {
 
-  const [accepted, setAccept] = useState(false)
+  const [total_price, setTotalPrice] = useState(props.composition.reduce((sum, item) => {return sum + item.price}, 0))
   return (
     <div className={style.container}>
       {props.composition.filter((item) => item.type === 'bun')
@@ -23,21 +22,21 @@ function BurgerConstructor(props) {
   .map((item) => (<ConstructorItem key={item._id} data={item} class='last'/>))}
       <div className={style.total_container}>
         <div className={style.price_value}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">{total_price}</p>
         </div>
         <div className={style.currency_container}>
           <CurrencyIcon/>
         </div>
-        <Button type="primary" size="large" onClick={() => {setAccept(true)}}>Оформить заказ</Button>
+        <Button type="primary" size="large" onClick={props.onModalOpen}>Оформить заказ</Button>
       </div>
-      {accepted && <OrderAcceptedPopup title='Детали ингридента' close={() => {setAccept(false)}}/>}
     </div>
 
   );
 }
 
 BurgerConstructor.propTypes = {
-  composition: PropTypes.arrayOf(ingredient).isRequired
+  composition: PropTypes.arrayOf(ingredient).isRequired,
+  onModalOpen: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;

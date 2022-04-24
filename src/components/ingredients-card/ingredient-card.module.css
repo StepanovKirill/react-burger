@@ -6,6 +6,7 @@
         align-items: center;
         margin: 0px 0 32px 0;
         position: relative;
+        cursor: pointer;
     }
     
     .price_container {
