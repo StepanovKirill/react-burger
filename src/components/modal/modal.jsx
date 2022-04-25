@@ -24,7 +24,6 @@ function Modal(props) {
     return ReactDOM.createPortal(
       (
         <>
-        <ModalOverlay onClose={onClose} >
           <div className={style.popup_container}>
             <div className={style.title_container}>
               <p className={`text text_type_main-large ${style.title}`}>
@@ -36,7 +35,7 @@ function Modal(props) {
             </div>
             {props.children}
           </div>
-        </ModalOverlay>
+        <ModalOverlay onClose={onClose} />
         </>
         ), document.getElementById('modal')
     )

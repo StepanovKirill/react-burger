@@ -14,7 +14,7 @@ function App() {
   // стейт для собранного бургера
   const [composition, setComposition] = useState([])
   const [isLoad, setIsLoad] = useState(true)
-  // стейт на модалкиы
+  // стейт на модалки
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentModal, setCurrentModal] = useState('')
   const [currentIngredient, setCurrentIngredient] = useState({})
@@ -39,7 +39,12 @@ function App() {
 
   useEffect(() => {
     fetch(URL)
-    .then((resp) => resp.json())
+    .then(resp => {
+      if (resp.ok) {
+          return resp.json();
+      }
+      return Promise.reject(resp.status);
+    })
     .then((data) => {
       setIngredients(data.data);
       setComposition([data.data[0],data.data[3],data.data[2], data.data[4], data.data[5]]);
@@ -52,13 +57,7 @@ function App() {
         setComposition([data[0],data[3],data[2], data[4], data[5],data[6],data[7]]);
         setIsLoad(false)},3000);
   })}, []);
-/*
-  useEffect (() => {
-    setIngredients(data);
-    setComposition([data[0],data[3],data[2], data[4], data[5],data[6],data[7]]);
-    setIsLoad(false)
-  }, [])
- */
+
   return (
     <div className={style.app}>
       <AppHeader />
@@ -79,12 +78,14 @@ function App() {
       </div>}
 
       <div id='modal'>
-      { isModalOpen &&
-          <Modal onClose={closeModal} title={`${currentModal === 'ingredientDetails' ? "Детали ингредиента" : ""}`}>
-            {currentModal === 'ingredientDetails'
-              ? <IngredientDetails ingredient={currentIngredient} />
-              : <OrderDetails />
-            }
+      { isModalOpen && currentModal === 'ingredientDetails' &&
+          <Modal onClose={closeModal} title="Детали ингредиента">
+            <IngredientDetails ingredient={currentIngredient} />
+          </Modal>
+      }
+      { isModalOpen && currentModal === 'orderDetails' &&
+          <Modal onClose={closeModal}>
+            <OrderDetails />
           </Modal>
       }
       </div>
