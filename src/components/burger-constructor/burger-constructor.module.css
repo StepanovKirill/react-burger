@@ -10,6 +10,7 @@
     flex-direction: column;
     width: 100%;
     margin-bottom: 16px;
+    height: min-content;
 }
 
 .scrolled {

@@ -8,7 +8,6 @@ import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
 function BurgerIngredients(props) {
   // стейт для таба
   const [current, setCurrent] = useState('bun')
-
   return (
     <section className={style.container}>
       <div className={style.title_container}>
@@ -26,9 +25,9 @@ function BurgerIngredients(props) {
       </Tab>
     </div>
     <div className={style.scrolled}>
-      <IngredientsTab key='1' ingredients={props.ingredients.filter((item) => item.type === 'bun')} name='bun' />
-      <IngredientsTab key='3' ingredients={props.ingredients.filter((item) => item.type === 'sauce')} name='sauce' />
-      <IngredientsTab key='2' ingredients={props.ingredients.filter((item) => item.type === 'main')} name='main' />
+      <IngredientsTab key='1' ingredients={props.ingredients.filter((item) => item.type === 'bun')} name='bun' onModalOpen={props.onModalOpen}/>
+      <IngredientsTab key='3' ingredients={props.ingredients.filter((item) => item.type === 'sauce')} name='sauce' onModalOpen={props.onModalOpen} />
+      <IngredientsTab key='2' ingredients={props.ingredients.filter((item) => item.type === 'main')} name='main' onModalOpen={props.onModalOpen}/>
     </div>
     </section>
   );

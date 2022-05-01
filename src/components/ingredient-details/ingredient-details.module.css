@@ -1,0 +1,46 @@
+.image_container {
+    width: 520px;
+    height: 240px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.image_container>image {
+    height: 240px;
+}
+
+.name_container {
+    height: 30px;
+    text-align: center;
+    color: var(--color-text-standart);
+    margin-bottom: 32px;
+}
+
+.name {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.property_container {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.property_item {
+    min-width: 112px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
+    align-items: center;
+}
+
+.property_value {
+    font-size: 28px;
+    line-height: 24px;
+    color: var(--color-text-secondary)
+}

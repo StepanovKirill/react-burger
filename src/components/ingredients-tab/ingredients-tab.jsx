@@ -13,7 +13,7 @@ function IngredientTab(props) {
         <p className="text text_type_main-medium">{names[props.name]}</p>
       </div>
       <div className={style.two_column}>
-        {props.ingredients.map((item) => (<IngredientCard key={item._id} data={item} count={item.count}/>))}
+        {props.ingredients.map((item) => (<IngredientCard key={item._id} data={item} count={item.count} onModalOpen={props.onModalOpen}/>))}
       </div>
     </section>
     )
