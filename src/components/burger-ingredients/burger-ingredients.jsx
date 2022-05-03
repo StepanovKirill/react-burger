@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
-import {IngredientsContext} from '../../context/ingredients-context.js';
+import {IngredientsContext} from '../../services/contexts/ingredients-context.js'
 
 function BurgerIngredients({onModalOpen}) {
   const ingredients = useContext(IngredientsContext).ingredients

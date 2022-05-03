@@ -6,10 +6,9 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx'
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx'
 import OrderDetails from '../order-details/order-details.jsx'
 import Modal from '../modal/modal'
-import data from '../../utils/data.js'
 import {getIngredients, postOrder} from '../../utils/fetch_api.js'
-import {IngredientsContext} from '../../context/ingredients-context.js'
-import {OrderContext} from '../../context/order-context.js'
+import {IngredientsContext} from '../../services/contexts/ingredients-context.js'
+import {OrderContext} from '../../services/contexts/order-context.js'
 
 function checkIngredients(array) {
   let oneBun = false
@@ -33,6 +32,7 @@ function App() {
   const [order, setOrder] = useState([])
 
   const [isLoad, setIsLoad] = useState(true)
+  const [error, setError] = useState(null)
 
   // стейт на модалки
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -43,13 +43,10 @@ function App() {
   const openModalOrderDetails = () => {
     setIsModalOpen(true);
     setCurrentModal('orderDetails');
-
-    if (order && !orderNumber) {
-      postOrder(order.map((item) => item._id))
+    postOrder(order.map((item) => item._id))
       .then(data => {setOrderNumber(data.order.number)})
       .catch(e => {console.error(e)}
-      )
-    }
+    )
   }
 
   const openModalIngredientDetails = (id) => {
@@ -72,13 +69,8 @@ function App() {
       setIsLoad(false)
     })
     .catch(e => {
-      setIsLoad(null);
-      console.error(e)
-      // переключение на захардкоженные данные в случае отвала апи
-      setTimeout(() => {
-        setIngredients(data);
-        setOrder(checkIngredients([data[0],data[3],data[2], data[4], data[5],data[6],data[7]]));
-        setIsLoad(false)},3000);
+      setIsLoad(null)
+      setError(e)
   })}, []);
 
   return (
@@ -94,15 +86,20 @@ function App() {
               <BurgerConstructor onModalOpen={openModalOrderDetails} />
             </OrderContext.Provider>
         </div>
-      </main>}
-      {isLoad === true &&
+      </main>
+      }
+
+      { isLoad === true &&
       <div className={style.message}>
         <p className='text text_type_main-large'>Загрузка...</p>
-      </div>}
-      {isLoad === null &&
+      </div>
+      }
+
+      { error &&
       <div className={style.message}>
-        <p className='text text_type_main-large'>Ошибка загрузки данных, переключаю на захардкоженные данные</p>
-      </div>}
+        <p className='text text_type_main-large'>Ошибка загрузки данных</p>
+      </div>
+      }
 
       <div id='modal'>
       { isModalOpen && currentModal === 'ingredientDetails' &&

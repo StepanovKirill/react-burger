@@ -1,15 +1,13 @@
-import {React, useEffect, useContext, useReducer} from 'react';
+import {React, useEffect, useContext, useReducer, useMemo} from 'react';
 import style from'./burger-constructor.module.css'
-import ConstructorItem from '../constructor-item/constructor-item';
-import {CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
+import {CurrencyIcon, Button, ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
-//import ingredient from '../../utils/types'
-import {OrderContext} from '../../context/order-context.js'
+import {OrderContext} from '../../services/contexts/order-context.js'
 
 const totalPriceInitialState = { totalPrice: 0 }
 
 function totalPriceReducer(state, action) {
-  
+
   switch (action.type) {
     case "set":
       return { totalPrice: action.totalPrice };
@@ -20,39 +18,72 @@ function totalPriceReducer(state, action) {
   }
 }
 
+function calculateTotalPrice(order) {
+  return order.reduce((sum, item) => {
+    if (item.type === 'bun') {
+      return sum + 2 * item.price
+    }
+    return sum + item.price
+  }, 0)
+}
+
 const BurgerConstructor = ({onModalOpen}) => {
   const order = useContext(OrderContext).order
   const [totalPriceState, totalPriceDispatcher] = useReducer(totalPriceReducer, totalPriceInitialState)
+  const totalPrice = useMemo(() => calculateTotalPrice(order), [order])
 
-  const calculateTotalPrice = () => {
-    return order.reduce((sum, item) => {
-      if (item.type === 'bun') {
-        return sum + 2 * item.price
-      }
-      return sum + item.price
-    }, 0)
-  }
+  const bunIngredients = order.filter((item) => item.type === 'bun')
+  const otherIngredients = order.filter((item) => item.type !== 'bun')
 
   useEffect(() => {
     if (order) {
-      totalPriceDispatcher({ type: "set", totalPrice: calculateTotalPrice()});
+      totalPriceDispatcher({ type: "set", totalPrice: totalPrice});
     } else {
       totalPriceDispatcher({ type: "reset" });
     }
-  }, [order]);
+  }, []);
 
   return (
     <section className={style.container}>
-      {order.filter((item) => item.type === 'bun')
-        .map((item) => (<ConstructorItem key={item._id} data={item} class='first'/>))}
+      {bunIngredients.map((item) => (
+        <div className={`${style.item_container} pl-8`}>
+          <ConstructorElement
+            key={item._id}
+            text={item.name + "\n(верх)"}
+            type='top'
+            isLocked={true}
+            price={item.price}
+            thumbnail={item.image}
+          />
+        </div>))}
       <div className={style.main}>
         <div className={style.scrolled}>
-        {order.filter((item) => item.type !== 'bun')
-          .map((item) => (<ConstructorItem key={item._id} data={item} class='main'/>))}
+        {otherIngredients.map((item) => (
+          <div className={style.item_container}>
+            <div className={style.drag}>
+              <DragIcon/>
+            </div>
+            <ConstructorElement
+              key={item._id}
+              text={item.name}
+              isLocked={false}
+              price={item.price}
+              thumbnail={item.image}
+            />
+          </div>))}
         </div>
       </div>
-      {order.filter((item) => item.type === 'bun')
-        .map((item) => (<ConstructorItem key={item._id} data={item} class='last'/>))}
+      {bunIngredients.map((item) => (
+        <div className={`${style.item_container} pl-8`}>
+          <ConstructorElement
+            key={item._id}
+            text={item.name + "\n(низ)"}
+            type='bottom'
+            isLocked={true}
+            price={item.price}
+            thumbnail={item.image}
+          />
+        </div>))}
       <div className={style.total_container}>
         <div className={style.price_value}>
           <p className="text text_type_digits-medium">{totalPriceState.totalPrice}</p>
