@@ -1,6 +1,7 @@
 .container {
     width: 600px;
     display: flex;
+    gap: 16px;
     flex-direction: column;
     padding-top: 100px;
 }
@@ -9,18 +10,28 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-bottom: 16px;
     height: min-content;
 }
 
 .scrolled {
-    overflow-y: scroll;
     display: flex;
+    overflow-y: scroll;
     flex-wrap: wrap;
-    margin: 16px 0;
     gap: 16px 0;
     height: calc(100vh - 536px);
     width: 100%;
+}
+
+.drag {
+    cursor: grab;
+}
+
+.item_container {
+    height: 80px;
+    width: 568px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .scrolled::-webkit-scrollbar {
@@ -33,10 +44,6 @@
 
 .scrolled::-webkit-scrollbar-thumb {
     background: #8585AD;
-}
-
-.scrolled:last-child {
-    margin-bottom: 0;
 }
 
 .total_container {

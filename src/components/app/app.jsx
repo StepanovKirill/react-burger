@@ -5,23 +5,48 @@ import BurgerConstructor from '../burger-constructor/burger-constructor.jsx'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx'
 import IngredientDetails from '../ingredient-details/ingredient-details.jsx'
 import OrderDetails from '../order-details/order-details.jsx'
-import Modal from '../modal/modal';
-import data from '../../utils/data.js'
+import Modal from '../modal/modal'
+import {getIngredients, postOrder} from '../../utils/fetch_api.js'
+import {IngredientsContext} from '../../services/contexts/ingredients-context.js'
+import {OrderContext} from '../../services/contexts/order-context.js'
+
+function checkIngredients(array) {
+  let oneBun = false
+  return (array.filter((item) => {
+    if (item.type === 'bun' && !oneBun) {
+      oneBun = true
+      return item
+    }
+    if (item.type !== 'bun') {
+      return item
+    }
+  }))
+}
 
 function App() {
+
   // стейт для ингредиентов
   const [ingredients, setIngredients] = useState([])
+
   // стейт для собранного бургера
-  const [composition, setComposition] = useState([])
+  const [order, setOrder] = useState([])
+
   const [isLoad, setIsLoad] = useState(true)
+  const [error, setError] = useState(null)
+
   // стейт на модалки
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentModal, setCurrentModal] = useState('')
   const [currentIngredient, setCurrentIngredient] = useState({})
+  const [orderNumber, setOrderNumber] = useState(null)
 
   const openModalOrderDetails = () => {
     setIsModalOpen(true);
     setCurrentModal('orderDetails');
+    postOrder(order.map((item) => item._id))
+      .then(data => {setOrderNumber(data.order.number)})
+      .catch(e => {console.error(e)}
+    )
   }
 
   const openModalIngredientDetails = (id) => {
@@ -35,27 +60,17 @@ function App() {
   const closeModal = () => {
     setIsModalOpen(false);
   };
-  const URL = 'https://norma.nomoreparties.space/api/ingredients'
 
+  // загрузка данных при монтировании компонента
   useEffect(() => {
-    fetch(URL)
-    .then(resp => {
-      if (resp.ok) {
-          return resp.json();
-      }
-      return Promise.reject(resp.status);
-    })
-    .then((data) => {
+    getIngredients().then((data) => {
       setIngredients(data.data);
-      setComposition([data.data[0],data.data[3],data.data[2], data.data[4], data.data[5]]);
+      setOrder(checkIngredients([...data.data]));
       setIsLoad(false)
     })
     .catch(e => {
-      setIsLoad(null);
-      setTimeout(() => {
-        setIngredients(data);
-        setComposition([data[0],data[3],data[2], data[4], data[5],data[6],data[7]]);
-        setIsLoad(false)},3000);
+      setIsLoad(null)
+      setError(e)
   })}, []);
 
   return (
@@ -64,18 +79,27 @@ function App() {
       {isLoad === false &&
       <main className={style.main}>
         <div className={style.container}>
-          <BurgerIngredients ingredients={ingredients} onModalOpen={openModalIngredientDetails} />
-          <BurgerConstructor composition={composition} onModalOpen={openModalOrderDetails} />
+            <IngredientsContext.Provider value={{ingredients, setIngredients}}>
+              <BurgerIngredients onModalOpen={openModalIngredientDetails} />
+            </IngredientsContext.Provider>
+            <OrderContext.Provider value={{order, setOrder}}>
+              <BurgerConstructor onModalOpen={openModalOrderDetails} />
+            </OrderContext.Provider>
         </div>
-      </main>}
-      {isLoad === true &&
+      </main>
+      }
+
+      { isLoad === true &&
       <div className={style.message}>
         <p className='text text_type_main-large'>Загрузка...</p>
-      </div>}
-      {isLoad === null &&
+      </div>
+      }
+
+      { error &&
       <div className={style.message}>
-        <p className='text text_type_main-large'>Ошибка загрузки данных, переключаю на захардкоженные данные</p>
-      </div>}
+        <p className='text text_type_main-large'>Ошибка загрузки данных</p>
+      </div>
+      }
 
       <div id='modal'>
       { isModalOpen && currentModal === 'ingredientDetails' &&
@@ -85,7 +109,7 @@ function App() {
       }
       { isModalOpen && currentModal === 'orderDetails' &&
           <Modal onClose={closeModal}>
-            <OrderDetails />
+            <OrderDetails orderNumber={orderNumber}/>
           </Modal>
       }
       </div>

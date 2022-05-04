@@ -1,13 +1,14 @@
 import React from "react";
+import PropTypes from 'prop-types'
 import style from './order-details.module.css'
 import {ReactComponent as DoneIcon} from '../../images/done.svg'
 
-function OrderDetails() {
+function OrderDetails({orderNumber}) {
   return (
     <>
       <div className={style.order_id_container}>
         <p className={`text text_type_digits-large ${style.order_id}`}>
-          12390
+          {orderNumber}
         </p>
       </div>
       <div className={style.popup_text}>
@@ -31,5 +32,10 @@ function OrderDetails() {
     </>
     )
 }
+
+OrderDetails.protoTypes = {
+  orderNumber: PropTypes.number
+}
+
 
 export default OrderDetails

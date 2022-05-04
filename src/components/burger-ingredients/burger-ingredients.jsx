@@ -1,13 +1,17 @@
-import {React, useState} from 'react';
+import {React, useState, useContext} from 'react';
 import ingredient from '../../utils/types';
 import PropTypes from 'prop-types'
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
+import {IngredientsContext} from '../../services/contexts/ingredients-context.js'
 
-function BurgerIngredients(props) {
+function BurgerIngredients({onModalOpen}) {
+  const ingredients = useContext(IngredientsContext).ingredients
+
   // стейт для таба
   const [current, setCurrent] = useState('bun')
+
   return (
     <section className={style.container}>
       <div className={style.title_container}>
@@ -25,16 +29,16 @@ function BurgerIngredients(props) {
       </Tab>
     </div>
     <div className={style.scrolled}>
-      <IngredientsTab key='1' ingredients={props.ingredients.filter((item) => item.type === 'bun')} name='bun' onModalOpen={props.onModalOpen}/>
-      <IngredientsTab key='3' ingredients={props.ingredients.filter((item) => item.type === 'sauce')} name='sauce' onModalOpen={props.onModalOpen} />
-      <IngredientsTab key='2' ingredients={props.ingredients.filter((item) => item.type === 'main')} name='main' onModalOpen={props.onModalOpen}/>
+      <IngredientsTab key='1' ingredients={ingredients.filter((item) => item.type === 'bun')} name='bun' onModalOpen={onModalOpen}/>
+      <IngredientsTab key='3' ingredients={ingredients.filter((item) => item.type === 'sauce')} name='sauce' onModalOpen={onModalOpen} />
+      <IngredientsTab key='2' ingredients={ingredients.filter((item) => item.type === 'main')} name='main' onModalOpen={onModalOpen}/>
     </div>
     </section>
   );
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingredient).isRequired
+  onModalOpen: PropTypes.func.isRequired
 }
 
 export default BurgerIngredients;
