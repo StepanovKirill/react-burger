@@ -1,17 +1,38 @@
-import React from 'react';
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {useDrag} from 'react-dnd'
 import PropTypes from 'prop-types'
-import ingredient from '../../utils/types';
+import ingredient from '../../utils/types'
 import style from'./ingredient-card.module.css'
 import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-components'
+import {useDispatch} from 'react-redux'
+import {openModalIngredient} from '../../services/actions/ingredients.js'
 
 function IngredientCard(props) {
-  const onClick = props.onModalOpen
+  const order = useSelector(store => store.constructor.ingredientsConstructor)
+
+  const [, dragRef] = useDrag({
+      type: 'ingredients',
+      item: props.data
+  })
+
+  const dispatch = useDispatch()
+
+  const openIngredientsDetail = (ingredient) => {
+    dispatch(openModalIngredient(ingredient))
+  }
+  const count = order?.filter(item => item._id === props.data._id).length
+
   return (
-    <div className={style.container} onClick={() => {props.onModalOpen(props.data._id)}}>
+    <div 
+      className={style.container}
+      onClick={() => {openIngredientsDetail(props.data._id)}} 
+      ref={dragRef}
+    >
       <div className={style.image_container}>
         <img src={props.data.image} alt={props.data.name} />
         <div className={style.counter}>
-          {props.count > 0 && <Counter count={props.count} size="default" />}
+          {count > 0 && <Counter count={count} size="default" />}
         </div>
       </div>
       <div className={style.price_container}>
@@ -33,7 +54,6 @@ function IngredientCard(props) {
 
 IngredientCard.propTypes = {
   data: ingredient.isRequired,
-  count: PropTypes.number
 }
 
 export default IngredientCard;

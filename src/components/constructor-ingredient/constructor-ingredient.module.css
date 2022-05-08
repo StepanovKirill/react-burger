@@ -1,0 +1,10 @@
+.item_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: grab;
+}
+
+.item_container:active {
+  cursor: grabbing;
+}
