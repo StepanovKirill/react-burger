@@ -2,7 +2,8 @@ import {
   POST_ORDER_REQUEST, 
   POST_ORDER_SUCCESS, 
   POST_ORDER_FAILED,
-  CLOSE_ORDER
+  CLOSE_ORDER,
+  RESET_ORDER_NUMBER
 } from '../actions/order.js'
 
 const orderInitialState = {
@@ -38,6 +39,12 @@ export const orderReducer = (state = orderInitialState, action) => {
       return {
           ...state,
           orderNumber: null
+      }
+    }
+    case RESET_ORDER_NUMBER: {
+      return {
+        ...state,
+        orderNumber: null
       }
     }
     default: {

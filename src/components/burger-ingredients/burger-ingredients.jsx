@@ -1,8 +1,8 @@
-import {React, useState, useRef} from 'react';
+import {React, useState, useRef} from 'react'
 import style from'./burger-ingredients.module.css'
 import {Tab} from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsTab from '../ingredients-tab/ingredients-tab.jsx'
-import {useSelector} from 'react-redux';
+import {useSelector} from 'react-redux'
 
 function BurgerIngredients() {
   const {ingredients} = useSelector(store => store.ingredients)

@@ -14,7 +14,8 @@ function MenuButton(props) {
 MenuButton.propTypes = {
   className: PropTypes.string,
   active: PropTypes.bool.isRequired,
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  children: PropTypes.node
 }
 
 export default MenuButton;

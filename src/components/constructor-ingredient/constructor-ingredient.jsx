@@ -58,7 +58,7 @@ ConstructorIngredient.propTypes = {
   item: ingredient.isRequired,
   onMove: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
-  index: PropTypes.number
+  index: PropTypes.number.isRequired
 }
 
 export default ConstructorIngredient

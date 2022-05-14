@@ -12,7 +12,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {postOrder} from '../../services/actions/order.js';
 import {
   setTotalPrice,
-  resetTotalPrice,
   addIngredient,
   deleteIngredient,
   resetIngredients,
@@ -41,10 +40,9 @@ const BurgerConstructor = () => {
       setTotalPrice(totalPrice)
     } 
     if (orderFailed) {
-      resetTotalPrice()
       dispatch(resetIngredients())
     }
-  }, [dispatch, orderFailed, ingredients, totalPrice])
+  }, [dispatch, ingredients, orderFailed, totalPrice])
 
   const handleDeleteIngredient = (uid) => {
     dispatch(deleteIngredient(uid));
@@ -53,6 +51,7 @@ const BurgerConstructor = () => {
     if (ingredients) {
       const order = ingredients?.map(((item) => item._id)) 
       dispatch(postOrder(order))
+      dispatch(resetIngredients())
     }
   }, [dispatch, ingredients])
 
@@ -65,7 +64,6 @@ const BurgerConstructor = () => {
       dispatch(deleteIngredient(bunIngredient.uid));
     } 
     dispatch(addIngredient(ingredient, uuid()));
-    
   };
 
   const [, dropTarget] = useDrop({
@@ -147,7 +145,7 @@ const BurgerConstructor = () => {
           type="primary"
           size="large" 
           onClick={makeOrder}
-          disabled={orderRequest || !ingredients}
+          disabled={orderRequest || !bunIngredient || bunIngredient?.length < 2 || !otherIngredients || otherIngredients?.length < 1}
         >
           {orderRequest ? "Заказ готовится" : "Оформить заказ"}
         </Button>

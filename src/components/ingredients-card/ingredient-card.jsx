@@ -8,12 +8,12 @@ import {CurrencyIcon, Counter} from '@ya.praktikum/react-developer-burger-ui-com
 import {useDispatch} from 'react-redux'
 import {openModalIngredient} from '../../services/actions/ingredients.js'
 
-function IngredientCard(props) {
+function IngredientCard({ingredient}) {
   const order = useSelector(store => store.constructor.ingredientsConstructor)
 
   const [, dragRef] = useDrag({
       type: 'ingredients',
-      item: props.data
+      item: ingredient
   })
 
   const dispatch = useDispatch()
@@ -21,16 +21,16 @@ function IngredientCard(props) {
   const openIngredientsDetail = (ingredient) => {
     dispatch(openModalIngredient(ingredient))
   }
-  const count = order?.filter(item => item._id === props.data._id).length
+  const count = order?.filter(item => item._id === ingredient._id).length
 
   return (
     <div 
       className={style.container}
-      onClick={() => {openIngredientsDetail(props.data._id)}} 
+      onClick={() => {openIngredientsDetail(ingredient._id)}} 
       ref={dragRef}
     >
       <div className={style.image_container}>
-        <img src={props.data.image} alt={props.data.name} />
+        <img src={ingredient.image} alt={ingredient.name} />
         <div className={style.counter}>
           {count > 0 && <Counter count={count} size="default" />}
         </div>
@@ -38,7 +38,7 @@ function IngredientCard(props) {
       <div className={style.price_container}>
         <div className={style.price_value}>
           <p className="text text_type_digits-default">
-            {props.data.price}
+            {ingredient.price}
           </p>
         </div>
         <div className={style.icon}>
@@ -46,14 +46,14 @@ function IngredientCard(props) {
         </div>
       </div>
       <div className={style.name_container}>
-        <p className={`text text_type_main-small ${style.name_text}`}>{props.data.name}</p>
+        <p className={`text text_type_main-small ${style.name_text}`}>{ingredient.name}</p>
       </div>
     </div>
   );
 }
 
 IngredientCard.propTypes = {
-  data: ingredient.isRequired,
+  ingredient: ingredient.isRequired,
 }
 
 export default IngredientCard;

@@ -3,12 +3,7 @@ const INGREDIENT_API = URL_API + 'ingredients';
 const ORDER_API = URL_API + 'orders'
 
 export const getIngredientsRequest = () => {
-  return fetch(INGREDIENT_API).then(resp => {
-    if (resp.ok) {
-      return resp.json();
-    }
-    return Promise.reject(resp.status);
-  })
+  return fetch(INGREDIENT_API).then(checkResponse)
 };
 
 export const postOrderRequest = (ingredients) => {
@@ -18,10 +13,12 @@ export const postOrderRequest = (ingredients) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({ ingredients: ingredients }),
-  }).then(resp => {
-    if (resp.ok) {
-      return resp.json();
-    }
-    return Promise.reject(resp.status);
-  })
+  }).then(checkResponse)
+}
+
+const checkResponse = (response) => {
+  if (response.ok) {
+    return response.json();
+  }
+  return Promise.reject(response.status);
 }
