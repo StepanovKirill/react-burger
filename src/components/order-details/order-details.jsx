@@ -34,7 +34,7 @@ function OrderDetails({orderNumber}) {
 }
 
 OrderDetails.protoTypes = {
-  orderNumber: PropTypes.number
+  orderNumber: PropTypes.number.isRequired
 }
 
 
