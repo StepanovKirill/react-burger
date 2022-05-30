@@ -19,7 +19,9 @@ export const postOrder = (ingredients) => {
           type: POST_ORDER_SUCCESS,
           orderNumber: response.order.number
         })
-
+        dispatch({
+          type: RESET_ORDER_NUMBER,
+        })
       })
       .catch(e => {
         console.error(e);

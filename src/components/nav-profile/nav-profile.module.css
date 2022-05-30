@@ -1,0 +1,32 @@
+.nav_container {
+  width: 320px;
+  padding-left: 20px;
+  padding-right: 60px;
+}
+
+.nav_link {
+  composes: text_type_main-medium from global;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+}
+
+li {
+  line-height: 64px;
+  margin: 0;
+}
+
+.active_nav_link {
+  composes: text_type_main-medium from global;
+  color: var(--color-text-standart);
+  text-decoration: none;
+}
+
+.button {
+  composes: text_type_main-medium from global;
+  color: var(--color-text-secondary);
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+}
