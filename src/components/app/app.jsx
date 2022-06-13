@@ -15,13 +15,13 @@ import {closeModalOrder} from '../../services/actions/order.js'
 import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, ProfilePage, NotFoundPage, IngredientPage} from '../../pages'
 import ProtectedRoute from '../protected-route/protected-route'
 import {getUser} from '../../services/actions/user'
+import { getCookie } from '../../utils/cookie_handlers';
 
 function App() {
   const dispatch = useDispatch()
   const location = useLocation()
   const history = useHistory()
   const background = location?.state?.background
-
   const {ingredients} = useSelector(store => store.ingredients)
   const {orderNumber} = useSelector(store => store.order)
 
@@ -37,9 +37,11 @@ function App() {
   // загрузка данных при монтировании компонента
   useEffect(() => {
     dispatch(getIngredients())
-    dispatch(getUser())
+    
+    if (localStorage.getItem('refreshToken') && getCookie('token')) {
+      dispatch(getUser())
+    }
   }, [dispatch]);
-
   return (
     <div className={style.app}>
       <AppHeader />
@@ -59,6 +61,9 @@ function App() {
         <Route path='/reset-password'>
           <ResetPasswordPage />
         </Route>
+        <Route path='/ingredients/:id'>
+          <IngredientPage/>
+        </Route>
         < Route path="/" exact>
           {ingredients &&
             <main className={style.main}>
@@ -71,14 +76,10 @@ function App() {
             </main>
           }
         </Route>
-        <Route path='/ingredients/:id'>
-          <IngredientPage/>
-        </Route>
         <Route path='/*' exact>
           <NotFoundPage/>
         </Route>
       </Switch>
-      <div id='modal'>
         {background &&
           <Route path='/ingredients/:id'>
             <Modal onClose={closeIngredient} title="Детали ингредиента">
@@ -91,7 +92,6 @@ function App() {
             <OrderDetails orderNumber={orderNumber}/>
           </Modal>
         }
-      </div>
     </div>
   );
 };

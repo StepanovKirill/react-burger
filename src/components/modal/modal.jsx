@@ -11,7 +11,7 @@ function Modal(props) {
   useEffect(() => {
     const closeModal = (event) => {
       if (event.key === 'Escape' || event.keyCode === 27) {
-        onClose();
+        onClose()
       }
     }
     document.addEventListener('keydown', closeModal);

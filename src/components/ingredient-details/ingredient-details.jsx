@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect} from "react";
 import style from './ingredient-details.module.css'
 import {useSelector} from 'react-redux'
 import {useParams} from 'react-router-dom'
@@ -7,6 +7,12 @@ function IngredientDetails() {
   const params = useParams()
   const {ingredients} = useSelector(store => store.ingredients)
   const currentIngredient = ingredients.find(item => item._id === params.id)
+  useEffect(() => {
+  }, [ingredients]);
+
+  if (ingredients.length === 0) {
+    return null
+  }
   return (
     <>
       <div className={style.image_container}>

@@ -7,11 +7,10 @@ import {resetPassword} from '../../services/actions/user'
 
 export function ResetPasswordPage() {
   const [newPassword, setPassword] = useState('')
-  const [code, setCode] = useState(null)
+  const [code, setCode] = useState('')
   const dispatch = useDispatch()
   const history = useHistory()
   const prevPage = history.location.state?.from
-  console.log(history, prevPage)
   const isLogged = useSelector(store => store.user.isLogged)
 
   const onChangePassword = e => {
