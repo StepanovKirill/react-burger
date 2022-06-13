@@ -1,12 +1,16 @@
-import {React, useState} from "react"
+import {React, useState, useEffect} from "react"
 import style from './profile-info.module.css'
 import {PasswordInput, Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
+import {useDispatch, useSelector} from "react-redux"
+import {updateUser} from "../../services/actions/user"
 
 export function ProfileInfo() {
+  const dispatch = useDispatch()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isChange, setIsChange] = useState(false)
+  const {user} = useSelector(store => store.user)
   
   const onChangeName = e => {
     setIsChange(true)
@@ -23,18 +27,23 @@ export function ProfileInfo() {
   }
 
   const resetUserInfo = () => {
+    setName(user.name)
+    setEmail(user.email)
     setIsChange(false)
-
-    // TODO добавить редьюсер для сброса формы
-
   }
 
-  const updateUserInfo = () => {
-    // TODO добавить обновление данных о пользователе
+  const updateUserInfo = (e) => {
+    e.preventDefault()
+    dispatch(updateUser(email, name))
   }
+
+  useEffect(() => {
+    setName(user.name)
+    setEmail(user.email)
+  }, [user]);
 
   return (
-    <form className={style.form_container}>
+    <form className={style.form_container} onSubmit={updateUserInfo}>
       <div className={style.inputs_container}>
         <Input
           type={'text'}
@@ -55,12 +64,12 @@ export function ProfileInfo() {
           icon={'EditIcon'}
         />
         <PasswordInput value={password} onChange={onChangePassword}/>
-        </div>
+      </div>
         <Button type="secondary" size="medium" disabled={!isChange} onClick={resetUserInfo}>
-        Отмена
-        </Button>
+          Отмена
+        </Button>        
         <Button type="primary" size="medium" disabled={!isChange} onClick={updateUserInfo}>
-        Сохранить
+          Сохранить
         </Button> 
       </form>
   )

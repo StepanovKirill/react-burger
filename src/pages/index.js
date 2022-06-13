@@ -4,6 +4,7 @@ import {ForgotPasswordPage} from './forgot-password-page/forgot-password-page.js
 import {ResetPasswordPage} from './reset-password-page/reset-password-page.jsx'
 import {ProfilePage} from './profile-page/profile-page.jsx'
 import {NotFoundPage} from './not-found-page/not-found-page.jsx'
+import {IngredientPage} from './ingredient-page/ingredient-page.jsx'
 
 export {
   RegisterPage,
@@ -12,4 +13,5 @@ export {
   ResetPasswordPage,
   ProfilePage,
   NotFoundPage,
+  IngredientPage  
 }

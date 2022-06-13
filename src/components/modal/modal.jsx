@@ -24,17 +24,17 @@ function Modal(props) {
     (
     <>
       <div className={style.popup_container}>
-      <div className={style.title_container}>
-        <p className={`text text_type_main-large ${style.title}`}>
-        {props.title}
-        </p>
-        <div className={style.icon_container}>
-         <CloseIcon type="primary" onClick={onClose}/>
+        <div className={style.title_container}>
+          <p className={`text text_type_main-large ${style.title}`}>
+            {props.title}
+          </p>
+          <div className={style.icon_container}>
+            <CloseIcon type="primary" onClick={onClose}/>
+          </div>
         </div>
+        {props.children}
       </div>
-      {props.children}
-      </div>
-    <ModalOverlay onClose={onClose} />
+      <ModalOverlay onClose={onClose} />
     </>
     ), document.getElementById('modal')
   )

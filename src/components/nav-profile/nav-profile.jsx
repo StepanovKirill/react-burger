@@ -1,15 +1,16 @@
 import React from 'react' 
 import style from './nav-profile.module.css'
-import {NavLink, useLocation, useRouteMatch} from 'react-router-dom'
+import {NavLink, useRouteMatch} from 'react-router-dom'
+import {logout} from '../../services/actions/user'
+import {useDispatch} from 'react-redux'
 
 export function NavProfile() {
-
   const {url} = useRouteMatch()
-  const isProfilePage = useRouteMatch("/profile");
-  const logout = () => {
+  const isProfilePage = useRouteMatch("/profile")
+  const dispatch = useDispatch()
 
-    // TODO сделать выход
-
+  const logoutHandler = () => {
+    dispatch(logout())
   }
   
   return (
@@ -35,7 +36,7 @@ export function NavProfile() {
             </NavLink>
           </li>
           <li>
-            <button className={style.button} onClick={logout}>
+            <button className={style.button} onClick={logoutHandler}>
               Выход
             </button>
           </li>

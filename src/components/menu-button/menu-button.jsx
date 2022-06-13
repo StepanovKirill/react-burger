@@ -13,7 +13,7 @@ function MenuButton(props) {
 
 MenuButton.propTypes = {
   className: PropTypes.string,
-  active: PropTypes.bool.isRequired,
+  active: PropTypes.bool,
   text: PropTypes.string.isRequired,
   children: PropTypes.node
 }
