@@ -19,7 +19,6 @@ export const postOrder = (ingredients) => {
           type: POST_ORDER_SUCCESS,
           orderNumber: response.order.number
         })
-
       })
       .catch(e => {
         console.error(e);

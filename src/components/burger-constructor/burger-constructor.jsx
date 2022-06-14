@@ -17,6 +17,7 @@ import {
   resetIngredients,
   moveIngredient
 } from '../../services/actions/constructor';
+import { useHistory } from 'react-router-dom';
 
 function calculateTotalPrice(order) {
   if (!order) {
@@ -27,13 +28,16 @@ function calculateTotalPrice(order) {
 
 const BurgerConstructor = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
 
+  const isLogged = useSelector(store => store.user.isLogged)
   const ingredients = useSelector(store => store.constructor.ingredientsConstructor)
   const totalPrice = useMemo(() => calculateTotalPrice(ingredients), [ingredients])
   const {orderRequest, orderFailed} = useSelector(store => store.order);
   
   const bunIngredient = ingredients?.filter((item) => item.type === 'bun')[0]
   const otherIngredients = ingredients?.filter((item) => item.type !== 'bun')
+  
 
   useEffect(() => {
     if (ingredients) {
@@ -48,12 +52,14 @@ const BurgerConstructor = () => {
     dispatch(deleteIngredient(uid));
 }
   const makeOrder = useCallback(() => {
-    if (ingredients) {
+    if (ingredients && isLogged) {
       const order = ingredients?.map(((item) => item._id)) 
       dispatch(postOrder(order))
       dispatch(resetIngredients())
+    } else {
+      history.push({pathname: '/login'})
     }
-  }, [dispatch, ingredients])
+  }, [dispatch, ingredients, isLogged, history])
 
   const handleMoveIngredient = useCallback((sourceIndex, targetIndex) => {
     dispatch(moveIngredient(sourceIndex, targetIndex))

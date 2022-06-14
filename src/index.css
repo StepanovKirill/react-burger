@@ -1,15 +1,25 @@
 :root {
-    --color-interface-modal-bg: #1C1C21;
-    --color-interface-bg: #131316;
-    --color-text-standart: #F2F2F3;
-    --color-text-secondary: #8585AD;
+  --color-interface-modal-bg: #1C1C21;
+  --color-interface-bg: #131316;
+  --color-text-standart: #F2F2F3;
+  --color-text-secondary: #8585AD;
+  --color-link: #4C4CFF;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border-radius: 0;
-    background-color: var(--interface-bg);
-    overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border-radius: 0;
+  background-color: var(--interface-bg);
+  overflow: hidden;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul > li {
+  list-style-type: none;
 }

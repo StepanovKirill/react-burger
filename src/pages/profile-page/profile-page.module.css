@@ -1,0 +1,10 @@
+.profile_wrapper {
+  height: calc(100vh - 88px);
+  padding: 100px 0;
+  width: 1280px;
+  margin: 0 auto;
+}
+
+.profile_container {
+  display: flex;
+}

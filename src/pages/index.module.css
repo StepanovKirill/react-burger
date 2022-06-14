@@ -1,0 +1,41 @@
+.wrapper {
+  height: calc(100vh - 88px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 480px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.title {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.link {
+  color: var(--color-link); 
+}
+
+.form_container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 80px;
+}
+
+.inputs_container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+:global(.input) {
+  width: 480px
+}

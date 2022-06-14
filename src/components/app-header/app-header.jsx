@@ -1,27 +1,42 @@
 import {React, useState} from 'react';
 import style from './app-header.module.css'
+import {Link, useRouteMatch} from 'react-router-dom'
 import {Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import MenuButton from '../menu-button/menu-button.jsx';
+import { useSelector } from 'react-redux';
 
 function AppHeader() {
-  const [current, setCurrent] = useState('constructor');
+
+  const isMainPage = useRouteMatch("/")?.isExact;
+  const isFeedPage = useRouteMatch("/order-feed")?.isExact;
+  const isProfilePage = useRouteMatch("/profile")?.isExact;
+
+  const userName = useSelector(store => store.user?.user?.name)
 
   return (
     <header className={style.header_container}>
         <nav className={style.header}>
           <div className={style.container}>
-          <MenuButton className='mr-2' text='Конструктор' active={current === 'constructor'} onClick={() => setCurrent('constructor')}>
-            <BurgerIcon type={current === 'constructor' ? 'primary' : "secondary" }/>
-          </MenuButton>
-          <MenuButton text='Лента заказов' active={current === 'order'} onClick={() => setCurrent('order')}>
-            <ListIcon type={current === 'order' ? 'primary' : "secondary" }/>
-          </MenuButton>
+          <Link to='/' className={style.link}>
+            <MenuButton className='mr-2' text='Конструктор' active={isMainPage}>
+              <BurgerIcon type={isMainPage ? 'primary' : "secondary" }/>
+            </MenuButton>
+          </Link>
+          <Link to='/order-feed' className={style.link}>
+            <MenuButton text='Лента заказов' active={isFeedPage}>
+              <ListIcon type={isFeedPage ? 'primary' : "secondary" }/>
+            </MenuButton>
+          </Link>
           </div>
-          <MenuButton text='Личный кабинет' active={current === 'profile'} onClick={() => setCurrent('profile')}>
-            <ProfileIcon type={current === 'profile' ? 'primary' : "secondary" }/>
+          <Link to='/profile' className={style.link}>
+          <MenuButton text={userName || 'Личный кабинет'} active={isProfilePage}>
+            <ProfileIcon type={isProfilePage ? 'primary' : "secondary" }/>
           </MenuButton>
+          </Link>
         </nav>
-        <div className={style.logo}><Logo /></div>
+        <Link to='/' className={style.logo}>
+          <Logo />
+        </Link>
     </header>
   );
 }

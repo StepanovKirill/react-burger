@@ -24,6 +24,10 @@
     display: flex;
 }
 
+.link {
+  text-decoration: none;
+}
+
 @media (max-width:1280px) {
     .logo {
         position: relative;
