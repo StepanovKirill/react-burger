@@ -5,7 +5,7 @@ import {
   OPEN_INGREDIENT,
   CLOSE_INGREDIENT
 }
-from '../actions/ingredients.js'
+from '../actions/ingredients'
 
 const ingredientsInitialState = {
   ingredients: [],

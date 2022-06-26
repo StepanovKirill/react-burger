@@ -1,30 +1,40 @@
-import React from "react"
-import PropTypes from 'prop-types'
-import {useDrop, useDrag} from 'react-dnd'
-import style from './constructor-ingredient.module.css'
-import ingredient from "../../utils/types"
-import {ConstructorElement, DragIcon} from '@ya.praktikum/react-developer-burger-ui-components'
+import React, {FC} from "react";
+import { useDrop, useDrag } from 'react-dnd';
+import style from './constructor-ingredient.module.css';
+import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { TIngredient } from "../../utils/types";
 
-const ConstructorIngredient = ({item, onDelete, onMove, index}) => {
+type TConstructorIngredient = {
+  item: TIngredient;
+  onDelete: (uid: number | undefined) => void;
+  onMove: (targetIndex: number, sourceIndex: number) => void;
+  index: number;
+};
+
+export const ConstructorIngredient: FC<TConstructorIngredient> = ({item, onDelete, onMove, index}) => {
+  
   // ref
   const ref = React.useRef(null);
   
+  // TODO: useDrag typing???? 
   // on drag current element
   const [, dragRef] = useDrag({
     type: 'ingredient',
     item: {index}
   });
 
+  // TODO: useDrop typing???
   // on drop
   const [, dropTarget] = useDrop({
     accept: "ingredient",
-    hover: (item) => {
+    hover: (item: {index: number}) => {
       // index - is target index (current hover) of element in source array
       // item.index - is source index (current draggable) of element in source array
       const sourceIndex = item.index;
       const targetIndex = index;
       
       if (targetIndex === sourceIndex) return;
+      
       onMove(targetIndex, sourceIndex);
       
       // after moving reassign target index for current element
@@ -32,7 +42,7 @@ const ConstructorIngredient = ({item, onDelete, onMove, index}) => {
     }
   });
 
-dragRef(dropTarget(ref));
+  dragRef(dropTarget(ref));
 
   return (
     <div 
@@ -40,7 +50,7 @@ dragRef(dropTarget(ref));
       draggable
       ref={ref}
     >
-      <DragIcon/>
+      <DragIcon type="primary"/>
       <ConstructorElement
         key={item.uid}
         text={item.name}
@@ -52,13 +62,4 @@ dragRef(dropTarget(ref));
       />
     </div>
   )
-}
-
-ConstructorIngredient.propTypes = {
-  item: ingredient.isRequired,
-  onMove: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
-}
-
-export default ConstructorIngredient
+};

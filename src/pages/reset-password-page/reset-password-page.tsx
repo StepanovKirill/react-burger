@@ -1,27 +1,32 @@
-import {React, useState} from 'react'
+import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import style from '../index.module.css'
-import {Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {useDispatch, useSelector} from 'react-redux'
-import {resetPassword} from '../../services/actions/user'
+import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { resetPassword } from '../../services/actions/user'
 
 export function ResetPasswordPage() {
-  const [newPassword, setPassword] = useState('')
-  const [code, setCode] = useState('')
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const prevPage = history.location.state?.from
-  const isLogged = useSelector(store => store.user.isLogged)
+  const [newPassword, setPassword] = React.useState<string>('')
+  const [code, setCode] = React.useState<string>('')
 
-  const onChangePassword = e => {
+  // TODO: hook typing ???
+  const dispatch = useDispatch()
+
+  const history = useHistory<{from: string}>()
+  const prevPage: string = history.location.state?.from
+
+  // TODO: store typing
+  const isLogged = useSelector<any, boolean>(store => store.user.isLogged)
+
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
 
-  const onChangeCode = e => {
+  const onChangeCode = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCode(e.target.value)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     dispatch(resetPassword(newPassword, code))

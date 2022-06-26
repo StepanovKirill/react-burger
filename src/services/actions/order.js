@@ -1,4 +1,4 @@
-import { postOrderRequest } from '../../utils/fetch_api.js'
+import { postOrderRequest } from '../../utils/fetch_api'
 
 export const POST_ORDER_REQUEST = 'POST_ORDER_REQUEST'
 export const POST_ORDER_SUCCESS = 'POST_ORDER_SUCCESS'

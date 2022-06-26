@@ -1,29 +1,37 @@
-import {useEffect, React} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {DndProvider} from "react-dnd";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import {Route, Switch, useHistory, useLocation} from 'react-router-dom';
-import style from'./app.module.css'
-import AppHeader from '../app-header/app-header.jsx'
-import BurgerConstructor from '../burger-constructor/burger-constructor.jsx'
-import BurgerIngredients from '../burger-ingredients/burger-ingredients.jsx'
-import IngredientDetails from '../ingredient-details/ingredient-details.jsx'
-import OrderDetails from '../order-details/order-details.jsx'
-import Modal from '../modal/modal'
-import {getIngredients, closeModalIngredient} from '../../services/actions/ingredients.js'
-import {closeModalOrder} from '../../services/actions/order.js'
-import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, ProfilePage, NotFoundPage, IngredientPage} from '../../pages'
-import ProtectedRoute from '../protected-route/protected-route'
-import {getUser} from '../../services/actions/user'
+import * as React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Location } from "history";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import style from'./app.module.css';
+import AppHeader from '../app-header/app-header';
+import { BurgerConstructor } from '../burger-constructor/burger-constructor';
+import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { OrderDetails } from '../order-details/order-details';
+import { Modal } from '../modal/modal';
+import { getIngredients, closeModalIngredient} from '../../services/actions/ingredients';
+import { closeModalOrder } from '../../services/actions/order';
+import { LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, ProfilePage, NotFoundPage, IngredientPage } from '../../pages';
+import { ProtectedRoute } from '../protected-route/protected-route';
+import { getUser } from '../../services/actions/user';
 import { getCookie } from '../../utils/cookie_handlers';
 
-function App() {
+const App = () => {
+
+  // TODO: hook useDispatch typing
   const dispatch = useDispatch()
-  const location = useLocation()
-  const history = useHistory()
+
+  const location = useLocation<{ background: Location | undefined }>()
+  const history = useHistory<History>()
+
+  // background — is background page under modal window
   const background = location?.state?.background
-  const {ingredients} = useSelector(store => store.ingredients)
-  const {orderNumber} = useSelector(store => store.order)
+
+  // TODO: store typing
+  const { ingredients } = useSelector<any, any>(store => store.ingredients)
+  const { orderNumber } = useSelector<any, any>(store => store.order)
 
   const closeIngredient = () => {
     dispatch(closeModalIngredient())
@@ -34,8 +42,8 @@ function App() {
     dispatch(closeModalOrder())
   }
 
-  // загрузка данных при монтировании компонента
-  useEffect(() => {
+  // loading ingredients and login if user already logged
+  React.useEffect(() => {
     dispatch(getIngredients())
     
     if (localStorage.getItem('refreshToken') && getCookie('token')) {
@@ -88,7 +96,7 @@ function App() {
           </Route>
         }
         {orderNumber &&
-          <Modal onClose={closeOrder}>
+          <Modal onClose={closeOrder} title=''>
             <OrderDetails orderNumber={orderNumber}/>
           </Modal>
         }

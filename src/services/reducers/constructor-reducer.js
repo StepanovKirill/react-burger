@@ -4,7 +4,7 @@ import {RESET_TOTAL_PRICE,
         DELETE_INGREDIENT,
         MOVE_INGREDIENT,
         RESET_INGREDIENTS
-      } from '../actions/constructor.js'
+      } from '../actions/constructor'
 
 const constructorInitialState = {
   totalPrice: 0,
