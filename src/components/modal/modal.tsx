@@ -13,7 +13,7 @@ export const Modal: FC<TModalTypes> = ({onClose, title, children}) => {
 
   //TODO: check event typing
   React.useEffect(() => {
-    const closeModal = (e: {key: string, keyCode: number}) => {
+    const closeModal = (e: KeyboardEvent) => {
       if (e.key === 'Escape' || e.keyCode === 27) {
         onClose()
       }
