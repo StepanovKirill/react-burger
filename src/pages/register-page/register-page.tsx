@@ -1,29 +1,30 @@
-import {React, useState, useEffect} from 'react'
-import {useSelector, useDispatch} from 'react-redux'
-import {Link} from 'react-router-dom'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import style from '../index.module.css'
-import {PasswordInput, Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {registrationUser} from '../../services/actions/user'
+import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { registrationUser } from '../../services/actions/user'
 
 export function RegisterPage() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [name, setName] = React.useState<string>('')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
 
+  // TODO: hook typing ??
   const dispatch = useDispatch()
   
-  const onChangeName = e => {
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value)
   }
 
-  const onChangePassword = e => {
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
-  const onChangeEmail = e => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit= (e) => {
+  const handleSubmit= (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     dispatch(registrationUser(
@@ -54,7 +55,7 @@ export function RegisterPage() {
               error={false}
               errorText={'Ошибка'}
             />
-            <PasswordInput value={password} onChange={onChangePassword}/>
+            <PasswordInput value={password} onChange={onChangePassword} name=''/>
           </div>
           <Button type="primary" size="medium">
             Зарегистрироваться

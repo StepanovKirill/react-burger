@@ -1,35 +1,37 @@
-import {React, useState, useEffect} from 'react'
+import React from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import style from '../index.module.css'
 import {PasswordInput, Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {login} from '../../services/actions/user'
+import { login} from '../../services/actions/user'
 
 export function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = React.useState<string>('')
+  const [password, setPassword] = React.useState<string>('')
 
   const history = useHistory()
-  const from = useLocation().state?.from?.pathname
+  const from = useLocation<{from: {pathname: string}}>().state?.from?.pathname
+
+  // TODO: hooks typing
   const dispatch = useDispatch()
-  const isLogged = useSelector(store => store.user.isLogged)
-  const loginFailed = useSelector(store => store.user.loginFailed)
-  
-  const onChangePassword = e => {
+  const isLogged = useSelector<any, boolean>(store => store.user.isLogged)
+  const loginFailed = useSelector<any, boolean>(store => store.user.loginFailed)
+
+  const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
   }
-  const onChangeEmail = e => {
+  const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
 
     if (isLogged) {
       history.push({pathname: from ? from : '/'})
     }
   }, [history, isLogged, from])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     dispatch(login(email, password))
@@ -51,7 +53,7 @@ export function LoginPage() {
               error={loginFailed}
               errorText={'Ошибка'}
             />
-            <PasswordInput value={password} onChange={onChangePassword}/>
+            <PasswordInput value={password} onChange={onChangePassword} name=''/>
           </div>
           <Button type="primary" size="medium">
             Войти

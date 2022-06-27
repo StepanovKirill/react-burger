@@ -1,4 +1,4 @@
-import { getIngredientsRequest } from '../../utils/fetch_api.js'
+import { getIngredientsRequest } from '../../utils/fetch_api'
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";

@@ -1,9 +1,8 @@
-import React from "react";
-import PropTypes from 'prop-types'
+import React, {FC} from "react";
 import style from './order-details.module.css'
-import {ReactComponent as DoneIcon} from '../../images/done.svg'
+import { ReactComponent as DoneIcon } from '../../images/done.svg'
 
-function OrderDetails({orderNumber}) {
+export const OrderDetails: FC<{orderNumber: number}>= ({orderNumber}) => {
   return (
     <>
       <div className={style.order_id_container}>
@@ -32,10 +31,3 @@ function OrderDetails({orderNumber}) {
     </>
     )
 }
-
-OrderDetails.protoTypes = {
-  orderNumber: PropTypes.number.isRequired
-}
-
-
-export default OrderDetails

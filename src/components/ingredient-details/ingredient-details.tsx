@@ -1,13 +1,19 @@
-import {React, useEffect} from "react";
-import style from './ingredient-details.module.css'
-import {useSelector} from 'react-redux'
-import {useParams} from 'react-router-dom'
+import React from "react";
+import style from './ingredient-details.module.css';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { TIngredient } from "../../utils/types";
 
-function IngredientDetails() {
-  const params = useParams()
-  const {ingredients} = useSelector(store => store.ingredients)
-  const currentIngredient = ingredients.find(item => item._id === params.id)
-  useEffect(() => {
+export const IngredientDetails = () => {
+  // TODO: check hook typing
+  const params = useParams<{id: string}>()
+
+  // TODO: store typing
+  const ingredients: TIngredient[] = useSelector<any, TIngredient[]>(store => store.ingredients.ingredients)
+
+  const currentIngredient: TIngredient | undefined = ingredients?.find((item: TIngredient) => (item._id === params.id))
+
+  React.useEffect(() => {
   }, [ingredients]);
 
   if (ingredients.length === 0) {
@@ -16,11 +22,11 @@ function IngredientDetails() {
   return (
     <>
       <div className={style.image_container}>
-        <img src={currentIngredient.image_large} alt={currentIngredient.name}></img>
+        <img src={currentIngredient?.image_large} alt={currentIngredient?.name}></img>
       </div>
       <div className={style.name_container}>
         <p className="text text_type_main-medium">
-          {currentIngredient.name}
+          {currentIngredient?.name}
         </p>
       </div>
       <div className={style.property_container}>
@@ -29,7 +35,7 @@ function IngredientDetails() {
             Калории, ккал
           </p>
           <p className={`text text_type_digits-default ${style.property_value}`}>
-            {currentIngredient.calories}
+            {currentIngredient?.calories}
           </p>
         </div>
         <div className={style.property_item}>
@@ -37,7 +43,7 @@ function IngredientDetails() {
             Белки, г
           </p>
           <p className={`text text_type_digits-default ${style.property_value}`}>
-            {currentIngredient.proteins}
+            {currentIngredient?.proteins}
           </p>
         </div>
         <div className={style.property_item}>
@@ -45,7 +51,7 @@ function IngredientDetails() {
             Жиры, г
           </p>
           <p className={`text text_type_digits-default ${style.property_value}`}>
-            {currentIngredient.fat}
+            {currentIngredient?.fat}
           </p>
         </div>
         <div className={style.property_item}>
@@ -53,12 +59,10 @@ function IngredientDetails() {
             Углеводы, г
           </p>
           <p className={`text text_type_digits-default ${style.property_value}`}>
-            {currentIngredient.carbohydrates}
+            {currentIngredient?.carbohydrates}
           </p>
         </div>
       </div>
     </>
   )
 }
-
-export default IngredientDetails

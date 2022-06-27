@@ -1,15 +1,15 @@
-import {React, useEffect, useMemo, useCallback} from 'react'
-import {useDrop} from "react-dnd"
-import uuid from 'react-uuid'
+import React, { FC } from 'react'
+import { useDrop } from "react-dnd"
+import { v4 as uuid } from 'uuid'
 import style from'./burger-constructor.module.css'
 import {
   CurrencyIcon,
   Button,
   ConstructorElement
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import ConstructorIngredient from '../constructor-ingredient/constructor-ingredient.jsx'
-import {useDispatch, useSelector} from 'react-redux';
-import {postOrder} from '../../services/actions/order.js';
+import { ConstructorIngredient } from '../constructor-ingredient/constructor-ingredient'
+import { useDispatch, useSelector } from 'react-redux';
+import { postOrder } from '../../services/actions/order.js';
 import {
   setTotalPrice,
   addIngredient,
@@ -18,28 +18,34 @@ import {
   moveIngredient
 } from '../../services/actions/constructor';
 import { useHistory } from 'react-router-dom';
+import { History } from 'history'
+import { TIngredient } from '../../utils/types';
 
-function calculateTotalPrice(order) {
+function calculateTotalPrice(order: TIngredient[] | undefined) {
   if (!order) {
     return 0;
   }
-  return order.reduce((sum, item) => sum + item.price, 0)
+  return order.reduce((sum: number, item: TIngredient) => sum + item.price, 0)
 }
 
-const BurgerConstructor = () => {
-  const dispatch = useDispatch()
-  const history = useHistory()
+export const BurgerConstructor: FC = () => {
+  const history: History = useHistory()
 
-  const isLogged = useSelector(store => store.user.isLogged)
-  const ingredients = useSelector(store => store.constructor.ingredientsConstructor)
-  const totalPrice = useMemo(() => calculateTotalPrice(ingredients), [ingredients])
-  const {orderRequest, orderFailed} = useSelector(store => store.order);
+  // TODO: store typing
+  const isLogged = useSelector<any, boolean>(store => store.user.isLogged);
+  const ingredients = useSelector<any, TIngredient[]>(store => store.constructor.ingredientsConstructor);
+  const {orderRequest, orderFailed} = useSelector<any, any>(store => store.order);
+
+  // TODO: hook typing
+  const dispatch = useDispatch();
+
+  const totalPrice = React.useMemo(() => calculateTotalPrice(ingredients), [ingredients])
   
-  const bunIngredient = ingredients?.filter((item) => item.type === 'bun')[0]
-  const otherIngredients = ingredients?.filter((item) => item.type !== 'bun')
+  const bunIngredient = ingredients?.filter((item: TIngredient) => item.type === 'bun')[0]
+  const otherIngredients = ingredients?.filter((item: TIngredient) => item.type !== 'bun')
   
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (ingredients) {
       setTotalPrice(totalPrice)
     } 
@@ -48,12 +54,13 @@ const BurgerConstructor = () => {
     }
   }, [dispatch, ingredients, orderFailed, totalPrice])
 
-  const handleDeleteIngredient = (uid) => {
+  const handleDeleteIngredient = (uid: number | undefined) => {
     dispatch(deleteIngredient(uid));
 }
-  const makeOrder = useCallback(() => {
+  const makeOrder = React.useCallback(() => {
+
     if (ingredients && isLogged) {
-      const order = ingredients?.map(((item) => item._id)) 
+      const order: string[] = ingredients?.map(((item: TIngredient) => item._id)) 
       dispatch(postOrder(order))
       dispatch(resetIngredients())
     } else {
@@ -61,11 +68,11 @@ const BurgerConstructor = () => {
     }
   }, [dispatch, ingredients, isLogged, history])
 
-  const handleMoveIngredient = useCallback((sourceIndex, targetIndex) => {
+  const handleMoveIngredient = React.useCallback((sourceIndex, targetIndex) => {
     dispatch(moveIngredient(sourceIndex, targetIndex))
   }, [dispatch])
 
-  const handleDrop = (ingredient) => {
+  const handleDrop = (ingredient: TIngredient) => {
     if (ingredient.type === "bun" && bunIngredient) {
       dispatch(deleteIngredient(bunIngredient.uid));
     } 
@@ -74,7 +81,7 @@ const BurgerConstructor = () => {
 
   const [, dropTarget] = useDrop({
     accept: "ingredients",
-    drop: (ingredient) => {
+    drop: (ingredient: TIngredient) => {
       handleDrop(ingredient);
     }
   });
@@ -145,13 +152,13 @@ const BurgerConstructor = () => {
           <p className="text text_type_digits-medium">{totalPrice}</p>
         </div>
         <div className={style.currency_container}>
-          <CurrencyIcon/>
+          <CurrencyIcon type="primary"/>
         </div>
         <Button 
           type="primary"
           size="large" 
           onClick={makeOrder}
-          disabled={orderRequest || !bunIngredient || bunIngredient?.length < 2 || !otherIngredients || otherIngredients?.length < 1}
+          disabled={orderRequest || !bunIngredient || !otherIngredients || otherIngredients?.length < 1}
         >
           {orderRequest ? "Заказ готовится" : "Оформить заказ"}
         </Button>
@@ -160,5 +167,3 @@ const BurgerConstructor = () => {
     </section>
   );
 }
-
-export default BurgerConstructor;

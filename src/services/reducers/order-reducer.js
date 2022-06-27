@@ -4,7 +4,7 @@ import {
   POST_ORDER_FAILED,
   CLOSE_ORDER,
   RESET_ORDER_NUMBER
-} from '../actions/order.js'
+} from '../actions/order'
 
 const orderInitialState = {
   orderNumber: null,

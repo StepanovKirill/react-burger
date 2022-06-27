@@ -1,7 +1,7 @@
-import React from "react"
+import React, { FC } from "react"
 import style from '../index.module.css'
 
-export function NotFoundPage() {
+export const NotFoundPage: FC= () => {
   return (
     <main className={style.wrapper}>
       <div className={style.container}>

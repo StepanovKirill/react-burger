@@ -9,7 +9,7 @@ import {
   updateUserRequest
 } from '../../utils/fetch_api'
 
-import {setCookie, deleteCookie, getCookie} from '../../utils/cookie_handlers'
+import {setCookie, deleteCookie} from '../../utils/cookie_handlers'
 
 // регистрация нового пользователя
 export const REGISTRATION_REQUEST = 'REGISTRATION_REQUEST'

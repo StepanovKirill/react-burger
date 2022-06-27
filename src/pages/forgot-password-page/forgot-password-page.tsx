@@ -1,21 +1,23 @@
-import {React, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {Link, useHistory} from 'react-router-dom'
+import React, { ChangeEvent } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useHistory } from 'react-router-dom'
 import style from '../index.module.css'
-import {Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
-import {forgotPassword} from '../../services/actions/user'
+import {  Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { forgotPassword } from '../../services/actions/user';
 
 export function ForgotPasswordPage() {
-  const [email, setEmail] = useState('')
-  const dispatch = useDispatch()
-  const history = useHistory()
-  const isLogged = useSelector(store => store.user.isLogged)
+  const [email, setEmail] = React.useState<string>('')
+  const history = useHistory<{ from: string }>()
 
-  const onChangeEmail = e => {
+  // TODO: hook's typing
+  const dispatch = useDispatch()
+  const isLogged = useSelector<any, any>(store => store.user.isLogged)
+
+  const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(forgotPassword(email))
     history.push({pathname: '/reset-password', state: {from: history.location.pathname}})

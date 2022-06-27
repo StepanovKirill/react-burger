@@ -1,11 +1,13 @@
-import React from 'react'
+import React, {FC} from 'react'
 import style from './profile-page.module.css'
-import {Route, Switch, useRouteMatch} from 'react-router-dom';
-import {NavProfile} from '../../components/nav-profile/nav-profile'
-import {ProfileInfo} from '../../components/profile-info/profile-info';
-import {ProfileOrders} from '../../components/profile-orders/profile-orders'
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { NavProfile } from '../../components/nav-profile/nav-profile'
+import { ProfileInfo } from '../../components/profile-info/profile-info';
+import { ProfileOrders } from '../../components/profile-orders/profile-orders'
 
-export function ProfilePage() {
+export const ProfilePage: FC = () => {
+
+  //TODO: hook typing
   const {path} = useRouteMatch()
 
   return (

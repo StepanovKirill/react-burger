@@ -1,4 +1,4 @@
-import {getCookie} from '../utils/cookie_handlers'
+import {getCookie} from './cookie_handlers'
 
 const URL_API = 'https://norma.nomoreparties.space/api/'
 const INGREDIENT_API = URL_API + 'ingredients';
@@ -16,7 +16,7 @@ export const getIngredientsRequest = () => {
   return fetch(INGREDIENT_API).then(checkResponse)
 };
 
-export const postOrderRequest = (ingredients) => {
+export const postOrderRequest = (ingredients: {ingredients: string[]}) => {
   return fetch(ORDER_API, {
     method: "POST",
     headers: {
@@ -26,7 +26,7 @@ export const postOrderRequest = (ingredients) => {
   }).then(checkResponse)
 }
 
-export const registrationUserRequest = (email, password, name) => {
+export const registrationUserRequest = (email: string, password: string, name: string) => {
   return fetch(REGISTRATION_USER_API, {
     method: "POST",
     headers: {
@@ -40,7 +40,7 @@ export const registrationUserRequest = (email, password, name) => {
   }).then(checkResponse)
 }
 
-export const forgotPasswordRequest = email => {
+export const forgotPasswordRequest = (email: string) => {
   return fetch(FORGOT_PASSWORD_API, {
     method: "POST",
     headers: {
@@ -52,7 +52,7 @@ export const forgotPasswordRequest = email => {
   }).then(checkResponse)
 }
 
-export const resetPasswordRequest = (password, code) => {
+export const resetPasswordRequest = (password: string, code: string) => {
   return fetch(RESET_PASSWORD_API, {
     method: "POST",
     headers: {
@@ -65,7 +65,7 @@ export const resetPasswordRequest = (password, code) => {
   }).then(checkResponse)
 }
 
-export const loginRequest = (email, password) => {
+export const loginRequest = (email: string, password: string) => {
   return fetch(LOGIN_API, {
     method: "POST",
     headers: {
@@ -107,24 +107,24 @@ export const getUserRequest = () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: getCookie('token')
+      "Authorization": String(getCookie('token'))
     }
   }).then(checkResponse)
 }
 
-export const updateUserRequest = (email, name) => {
+export const updateUserRequest = (email: string, name: string) => {
   return fetch(UPDATE_USER_API, {
     method: "PATCH",
     headers: {
         "Content-Type": "application/json",
-        Authorization: getCookie('token'),
+        "Authorization": String(getCookie('token'))
     },
     body: JSON.stringify({ email, name }),
 })
 .then(checkResponse)
 }
 
-const checkResponse = (response) => {
+const checkResponse = (response: Response) => {
   if (response.ok) {
     return response.json();
   }
