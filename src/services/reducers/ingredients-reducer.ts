@@ -1,20 +1,29 @@
+import { TIngredient } from '../../utils/types';
 import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
   OPEN_INGREDIENT,
-  CLOSE_INGREDIENT
+  CLOSE_INGREDIENT,
+  TIngredientsActions
 }
-from '../actions/ingredients'
+from '../actions/ingredients';
 
-const ingredientsInitialState = {
+type TIngredientsStateType = {
+  ingredients: TIngredient[];
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  currentIngredient: TIngredient | null;
+};
+
+const ingredientsInitialState: TIngredientsStateType = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
   currentIngredient: null
 }
 
-export const ingredientsReducer = (state = ingredientsInitialState, action) => {
+export const ingredientsReducer = (state: TIngredientsStateType = ingredientsInitialState, action: TIngredientsActions): TIngredientsStateType => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return ({

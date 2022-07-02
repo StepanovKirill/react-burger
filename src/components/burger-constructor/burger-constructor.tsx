@@ -9,7 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ConstructorIngredient } from '../constructor-ingredient/constructor-ingredient'
 import { useDispatch, useSelector } from 'react-redux';
-import { postOrder } from '../../services/actions/order.js';
+import { postOrder } from '../../services/actions/order';
 import {
   setTotalPrice,
   addIngredient,
@@ -54,7 +54,7 @@ export const BurgerConstructor: FC = () => {
     }
   }, [dispatch, ingredients, orderFailed, totalPrice])
 
-  const handleDeleteIngredient = (uid: number | undefined) => {
+  const handleDeleteIngredient = (uid: string | undefined) => {
     dispatch(deleteIngredient(uid));
 }
   const makeOrder = React.useCallback(() => {

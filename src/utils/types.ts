@@ -10,5 +10,11 @@ export type TIngredient = {
   calories: number;
   fat: number;
   carbohydrates: number;
-  uid?: number
+  uid?: string | undefined;
 };
+
+export type TUser = {
+  email: string;
+  name: string;
+};
+
