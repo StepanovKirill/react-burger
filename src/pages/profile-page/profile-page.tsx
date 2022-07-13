@@ -7,7 +7,6 @@ import { ProfileOrders } from '../../components/profile-orders/profile-orders'
 
 export const ProfilePage: FC = () => {
 
-  //TODO: hook typing
   const {path} = useRouteMatch()
 
   return (

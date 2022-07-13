@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { Location } from "history";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -13,14 +13,14 @@ import { OrderDetails } from '../order-details/order-details';
 import { Modal } from '../modal/modal';
 import { getIngredients, closeModalIngredient} from '../../services/actions/ingredients';
 import { closeModalOrder } from '../../services/actions/order';
-import { LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, ProfilePage, NotFoundPage, IngredientPage } from '../../pages';
+import { LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, OrderPage, ProfilePage, NotFoundPage, IngredientPage, OrderFeedPage } from '../../pages';
 import { ProtectedRoute } from '../protected-route/protected-route';
 import { getUser } from '../../services/actions/user';
 import { getCookie } from '../../utils/cookie_handlers';
+import { Order } from '../order/order';
 
 const App = () => {
 
-  // TODO: hook useDispatch typing
   const dispatch = useDispatch()
 
   const location = useLocation<{ background: Location | undefined }>()
@@ -29,9 +29,8 @@ const App = () => {
   // background — is background page under modal window
   const background = location?.state?.background
 
-  // TODO: store typing
-  const { ingredients } = useSelector<any, any>(store => store.ingredients)
-  const { orderNumber } = useSelector<any, any>(store => store.order)
+  const { ingredients } = useSelector(store => store.ingredients)
+  const { orderNumber } = useSelector(store => store.order)
 
   const closeIngredient = () => {
     dispatch(closeModalIngredient())
@@ -57,6 +56,9 @@ const App = () => {
         <Route path="/login">
           <LoginPage />
         </Route>
+        <ProtectedRoute path='/profile/orders/:id' exact>
+          <OrderPage />
+        </ProtectedRoute>
         <ProtectedRoute path='/profile'>
           <ProfilePage />
         </ProtectedRoute>
@@ -72,7 +74,13 @@ const App = () => {
         <Route path='/ingredients/:id'>
           <IngredientPage/>
         </Route>
-        < Route path="/" exact>
+        <Route path='/order-feed/:id' exact>
+          <OrderPage />
+        </Route>
+        <Route path='/order-feed'>
+          <OrderFeedPage />
+        </Route>
+        <Route path="/" exact>
           {ingredients &&
             <main className={style.main}>
               <div className={style.container}>
@@ -94,6 +102,20 @@ const App = () => {
               <IngredientDetails />
             </Modal>
           </Route>
+        }
+        {background && 
+          <Route path='/order-feed/:id'>
+            <Modal onClose={closeIngredient} title=''>
+              <Order />
+            </Modal>
+          </Route>
+        }
+        {background && 
+          <ProtectedRoute path='/profile/orders/:id'>
+            <Modal onClose={closeIngredient} title=''>
+              <Order />
+            </Modal>
+          </ProtectedRoute>
         }
         {orderNumber &&
           <Modal onClose={closeOrder} title=''>

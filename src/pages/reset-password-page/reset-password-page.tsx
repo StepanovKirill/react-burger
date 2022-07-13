@@ -2,21 +2,19 @@ import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import style from '../index.module.css'
 import { Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { resetPassword } from '../../services/actions/user'
 
 export function ResetPasswordPage() {
   const [newPassword, setPassword] = React.useState<string>('')
   const [code, setCode] = React.useState<string>('')
 
-  // TODO: hook typing ???
   const dispatch = useDispatch()
 
   const history = useHistory<{from: string}>()
   const prevPage: string = history.location.state?.from
 
-  // TODO: store typing
-  const isLogged = useSelector<any, boolean>(store => store.user.isLogged)
+  const isLogged = useSelector(store => store.user.isLogged)
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)

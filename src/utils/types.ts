@@ -18,3 +18,25 @@ export type TUser = {
   name: string;
 };
 
+export type TOrder = {
+  ingredients: Array<string>;
+  _id: string;
+  status: "done" | "created" | "pending";
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+}
+
+export type TOrders = {
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
+}
+
+export type TOrdersFeed = {
+  success: boolean;
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
+};

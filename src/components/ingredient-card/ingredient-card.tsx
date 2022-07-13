@@ -1,17 +1,16 @@
 import React, {FC} from 'react'
-import {useSelector} from 'react-redux'
-import {useDrag} from 'react-dnd'
+import { useDrag } from 'react-dnd'
 import { TIngredient } from '../../utils/types'
 import style from'./ingredient-card.module.css'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { openModalIngredient } from '../../services/actions/ingredients'
 import { useLocation, Link } from 'react-router-dom'
 
 export const IngredientCard: FC<{ingredient: TIngredient}> = ({ingredient}) => {
 
   // TODO: store typing
-  const order: TIngredient[] | null = useSelector<any, TIngredient[]>(store => store.constructor.ingredientsConstructor)
+  const order: TIngredient[] | null = useSelector(store => store.constructor.ingredientsConstructor)
   
   // TODO: hook typing
   const dispatch = useDispatch()

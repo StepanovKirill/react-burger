@@ -2,13 +2,13 @@ import React, { SyntheticEvent } from 'react';
 import style from'./burger-ingredients.module.css';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { IngredientsTab } from '../ingredients-tab/ingredients-tab';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { TIngredient } from '../../utils/types';
 
 export const BurgerIngredients: React.FunctionComponent = () => {
 
   // TODO: store typing
-  const ingredients: TIngredient[] = useSelector<any, TIngredient[]>(store => store?.ingredients.ingredients)
+  const ingredients: TIngredient[] = useSelector(store => store?.ingredients.ingredients)
 
   // current tab
   const [current, setCurrent] = React.useState<string>('bun')

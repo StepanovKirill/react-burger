@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../services/types/hooks';
 import { Link } from 'react-router-dom'
 import style from '../index.module.css'
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -10,7 +10,6 @@ export function RegisterPage() {
   const [email, setEmail] = React.useState<string>('')
   const [password, setPassword] = React.useState<string>('')
 
-  // TODO: hook typing ??
   const dispatch = useDispatch()
   
   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {

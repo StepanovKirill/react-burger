@@ -8,7 +8,7 @@ import {
   ConstructorElement
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { ConstructorIngredient } from '../constructor-ingredient/constructor-ingredient'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { postOrder } from '../../services/actions/order';
 import {
   setTotalPrice,
@@ -32,9 +32,9 @@ export const BurgerConstructor: FC = () => {
   const history: History = useHistory()
 
   // TODO: store typing
-  const isLogged = useSelector<any, boolean>(store => store.user.isLogged);
-  const ingredients = useSelector<any, TIngredient[]>(store => store.constructor.ingredientsConstructor);
-  const {orderRequest, orderFailed} = useSelector<any, any>(store => store.order);
+  const isLogged = useSelector(store => store.user.isLogged);
+  const ingredients = useSelector(store => store.constructor.ingredientsConstructor);
+  const {orderRequest, orderFailed} = useSelector(store => store.order);
 
   // TODO: hook typing
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { Link, useHistory } from 'react-router-dom'
 import style from '../index.module.css'
 import {  Input, Button } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -11,7 +11,7 @@ export function ForgotPasswordPage() {
 
   // TODO: hook's typing
   const dispatch = useDispatch()
-  const isLogged = useSelector<any, any>(store => store.user.isLogged)
+  const isLogged = useSelector(store => store.user.isLogged)
 
   const onChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)

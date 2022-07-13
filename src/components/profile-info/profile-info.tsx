@@ -1,13 +1,12 @@
 import React, { ChangeEvent } from "react";
 import style from './profile-info.module.css';
 import { PasswordInput, Input, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import { updateUser } from "../../services/actions/user";
 
 export function ProfileInfo() {
-  // TODO: hooks typing
   const dispatch = useDispatch()
-  const { user } = useSelector<any, any>(store => store.user)
+  const { user } = useSelector(store => store.user)
 
   const [name, setName] = React.useState<string>('')
   const [email, setEmail] = React.useState<string>('') 
@@ -30,9 +29,9 @@ export function ProfileInfo() {
   }
 
   const resetUserInfo = () => {
-    setName(user.name)
-    setEmail(user.email)
-    setIsChange(false)
+    user && setName(user.name)
+    user &&  setEmail(user.email)
+    user &&  setIsChange(false)
   }
 
   const updateUserInfo = (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,8 +40,8 @@ export function ProfileInfo() {
   }
 
   React.useEffect(() => {
-    setName(user.name)
-    setEmail(user.email)
+    user && setName(user.name)
+    user && setEmail(user.email)
   }, [user]);
 
   return (
