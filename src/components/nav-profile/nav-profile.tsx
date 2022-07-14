@@ -3,7 +3,7 @@ import { ExtractRouteParams } from 'react-router'
 import style from './nav-profile.module.css'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 import { logout } from '../../services/actions/user'
-import { useDispatch } from 'react-redux'
+import { useDispatch } from '../../services/types/hooks';
 
 type TMatchProfilePage = ExtractRouteParams<'/profile'>;
 

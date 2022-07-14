@@ -1,17 +1,25 @@
-import {RESET_TOTAL_PRICE,
+import { TIngredient } from '../../utils/types';
+import { RESET_TOTAL_PRICE,
         SET_TOTAL_PRICE,
         ADD_INGREDIENT,
         DELETE_INGREDIENT,
         MOVE_INGREDIENT,
         RESET_INGREDIENTS
-      } from '../actions/constructor'
+      } from '../actions/constructor';
 
-const constructorInitialState = {
+import { TConstructorActions } from '../actions/constructor'
+      
+type TConstructorStateType = {
+  totalPrice: number;
+  ingredientsConstructor: Array<TIngredient>
+};
+
+const constructorInitialState: TConstructorStateType = {
   totalPrice: 0,
   ingredientsConstructor: []
 }
 
-export function constructorReducer(state = constructorInitialState, action) {
+export function constructorReducer(state: TConstructorStateType = constructorInitialState, action: TConstructorActions): TConstructorStateType {
 
   switch (action.type) {
     case SET_TOTAL_PRICE: {

@@ -1,0 +1,22 @@
+.scrolled {
+  width: 844px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100vh - 248px);
+  padding-right: 8px;
+}
+
+.scrolled::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrolled::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.scrolled::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}

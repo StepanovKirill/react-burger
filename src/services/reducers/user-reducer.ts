@@ -1,3 +1,4 @@
+import { TUser } from '../../utils/types';
 import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
@@ -22,10 +23,32 @@ import {
   UPDATE_USER_FAILED,
   REFRESH_TOKEN_FAILED,
   REFRESH_TOKEN_REQUEST,
-  REFRESH_TOKEN_SUCCESS
-} from '../actions/user'
+  REFRESH_TOKEN_SUCCESS,
+  TUserActions
+} from '../actions/user';
 
-const userInitialState = {
+type TUserStateTypes = {
+  user: TUser | null;
+  registrationRequest: boolean;
+  registrationFailed: boolean;
+  isLogged: boolean;
+  forgotPasswordRequest: boolean;
+  forgotPasswordFailed: boolean;
+  refreshTokenRequest: boolean;
+  refreshTokenFailed: boolean;
+  resetPasswordRequest: boolean;
+  resetPasswordFailed: boolean;
+  loginRequest: boolean;
+  loginFailed: boolean;
+  logoutRequest: boolean;
+  logoutFailed: boolean;
+  getUserRequest: boolean;
+  getUserFailed: boolean;
+  updateUserRequest: boolean;
+  updateUserFailed: boolean;
+};
+
+const userInitialState: TUserStateTypes = {
   user: null,
   registrationRequest: false,
   registrationFailed: false,
@@ -34,6 +57,8 @@ const userInitialState = {
   forgotPasswordFailed: false,
   resetPasswordRequest: false,
   resetPasswordFailed: false,
+  refreshTokenFailed: false,
+  refreshTokenRequest: false,
   loginRequest: false,
   loginFailed: false,
   logoutRequest: false,
@@ -42,9 +67,9 @@ const userInitialState = {
   getUserFailed: false,
   updateUserRequest: false,
   updateUserFailed: false
-}
+};
 
-export const userReducer = (state = userInitialState, action) => {
+export const userReducer = (state: TUserStateTypes = userInitialState, action: TUserActions): TUserStateTypes => {
   switch (action.type) {
     case REGISTRATION_REQUEST: {
       return {

@@ -1,0 +1,66 @@
+.wrapper {
+  width: 640px;
+}
+
+.order_status {
+  composes: text text_type_main-default from global;
+  display: flex;
+  margin-top: 8px;
+}
+
+.done {
+  color: #00CCCC;
+}
+
+.ingredient {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;   
+}
+
+.scrolled {
+  height: 312px;
+  padding-right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.scrolled::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrolled::-webkit-scrollbar-track {
+  background: #2F2F37;
+}
+
+.scrolled::-webkit-scrollbar-thumb {
+  background: #8585AD;
+}
+
+.icon {
+  display: flex; 
+  align-items: center;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+}
+
+.total_price_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.total_price {
+  composes: text text_type_digits-default from global;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

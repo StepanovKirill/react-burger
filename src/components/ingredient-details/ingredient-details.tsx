@@ -1,6 +1,6 @@
 import React from "react";
 import style from './ingredient-details.module.css';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 import { useParams } from 'react-router-dom';
 import { TIngredient } from "../../utils/types";
 
@@ -9,7 +9,7 @@ export const IngredientDetails = () => {
   const params = useParams<{id: string}>()
 
   // TODO: store typing
-  const ingredients: TIngredient[] = useSelector<any, TIngredient[]>(store => store.ingredients.ingredients)
+  const ingredients: TIngredient[] = useSelector(store => store.ingredients.ingredients)
 
   const currentIngredient: TIngredient | undefined = ingredients?.find((item: TIngredient) => (item._id === params.id))
 

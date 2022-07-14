@@ -3,7 +3,7 @@ import style from './app-header.module.css'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import MenuButton from '../menu-button/menu-button';
-import { useSelector } from 'react-redux';
+import { useSelector } from '../../services/types/hooks';
 
 const AppHeader = () => {
 
@@ -14,7 +14,7 @@ const AppHeader = () => {
   const isProfilePage = useRouteMatch("/profile")?.isExact;
 
   // TODO: store typing
-  const userName = useSelector<any, any>(store => store.user?.user?.name)
+  const userName = useSelector(store => store.user?.user?.name)
   const profile = userName ? userName : "Личный кабинет";
 
   return (

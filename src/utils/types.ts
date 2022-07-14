@@ -10,5 +10,33 @@ export type TIngredient = {
   calories: number;
   fat: number;
   carbohydrates: number;
-  uid?: number
+  uid?: string | undefined;
+};
+
+export type TUser = {
+  email: string;
+  name: string;
+};
+
+export type TOrder = {
+  ingredients: Array<string>;
+  _id: string;
+  status: "done" | "created" | "pending";
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+}
+
+export type TOrders = {
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
+}
+
+export type TOrdersFeed = {
+  success: boolean;
+  orders: Array<TOrder>;
+  total: number;
+  totalToday: number;
 };

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
+import { useSelector, useDispatch } from '../../services/types/hooks';
 import style from '../index.module.css'
 import {PasswordInput, Input, Button} from '@ya.praktikum/react-developer-burger-ui-components'
 import { login} from '../../services/actions/user'
@@ -14,8 +14,8 @@ export function LoginPage() {
 
   // TODO: hooks typing
   const dispatch = useDispatch()
-  const isLogged = useSelector<any, boolean>(store => store.user.isLogged)
-  const loginFailed = useSelector<any, boolean>(store => store.user.loginFailed)
+  const isLogged = useSelector(store => store.user.isLogged)
+  const loginFailed = useSelector(store => store.user.loginFailed)
 
   const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)

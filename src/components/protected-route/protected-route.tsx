@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Route, Redirect, RouteProps  } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector } from '../../services/types/hooks';
 
 
 // TODO:: props typing ??? 
 export const ProtectedRoute: FC<RouteProps> = ({ children, ...props}) => {
-  const isLogged = useSelector<any, any>(store => store.user.isLogged)
+  const isLogged = useSelector(store => store.user.isLogged)
 
   return (
     <Route

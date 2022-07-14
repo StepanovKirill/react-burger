@@ -6,7 +6,7 @@ import { TIngredient } from "../../utils/types";
 
 type TConstructorIngredient = {
   item: TIngredient;
-  onDelete: (uid: number | undefined) => void;
+  onDelete: (uid: string | undefined) => void;
   onMove: (targetIndex: number, sourceIndex: number) => void;
   index: number;
 };
