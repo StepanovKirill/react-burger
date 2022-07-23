@@ -31,12 +31,10 @@ function calculateTotalPrice(order: TIngredient[] | undefined) {
 export const BurgerConstructor: FC = () => {
   const history: History = useHistory()
 
-  // TODO: store typing
   const isLogged = useSelector(store => store.user.isLogged);
   const ingredients = useSelector(store => store.constructor.ingredientsConstructor);
   const {orderRequest, orderFailed} = useSelector(store => store.order);
 
-  // TODO: hook typing
   const dispatch = useDispatch();
 
   const totalPrice = React.useMemo(() => calculateTotalPrice(ingredients), [ingredients])
@@ -95,7 +93,7 @@ export const BurgerConstructor: FC = () => {
                               ${(otherIngredients?.length > 0 && !bunIngredient) && style.itemContainerEmpty}`                           
   return (
     <section className={style.wrapper}>
-      <div className={containerStyle} ref={dropTarget}>
+      <div className={containerStyle} ref={dropTarget} data-test="constructor">
         <div className={`${itemContainerStyle} pl-8`}>
         {(otherIngredients?.length > 0 && !bunIngredient) && <div>
            <p className="text text_type_main-medium">
@@ -149,7 +147,7 @@ export const BurgerConstructor: FC = () => {
      </div>
      <div className={style.total_container}>
         <div className={style.price_value}>
-          <p className="text text_type_digits-medium">{totalPrice}</p>
+          <p className="text text_type_digits-medium" data-test="total-price">{totalPrice}</p>
         </div>
         <div className={style.currency_container}>
           <CurrencyIcon type="primary"/>

@@ -42,7 +42,7 @@ export const Modal: FC<TModalTypes> = ({onClose, title, children}) => {
   return ReactDOM.createPortal(
     (
     <>
-      <div className={style.popup_container}>
+      <div className={style.popup_container} data-test="modal">
         <div className={style.title_container}>
           {title && <p className='text text_type_main-large'>
             {title}
@@ -50,7 +50,7 @@ export const Modal: FC<TModalTypes> = ({onClose, title, children}) => {
           {orderNumber && <p className='text text_type_digits-default'>
             #{orderNumber}
           </p>}
-          <div className={style.icon_container}>
+          <div className={style.icon_container} data-test="close-modal">
             <CloseIcon type="primary" onClick={onClose}/>
           </div>
         </div>
