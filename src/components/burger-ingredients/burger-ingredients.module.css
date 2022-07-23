@@ -1,37 +1,38 @@
 .container {
-    width: 600px;
+  width: 600px;
+  background-color: var(--color-interface-bg);
 }
 
 .title_container {
-    margin: 40px 0 20px;
+  margin: 40px 0 20px;
 }
 
 .title_text {
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 40px;
-    letter-spacing: 0em;
-    text-align: left;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 40px;
+  letter-spacing: 0em;
+  text-align: left;
 }
 
 .tab {
-    display: flex;
-    margin-bottom: 40px;
+  display: flex;
+  margin-bottom: 40px;
 }
 
 .scrolled {
-    overflow-y: scroll;
-    height: calc(100vh - 324px);
+  overflow-y: scroll;
+  height: calc(100vh - 324px);
 }
 
 .scrolled::-webkit-scrollbar {
-    width: 8px;
+  width: 8px;
 }
 
 .scrolled::-webkit-scrollbar-track {
-    background: #2F2F37;
+  background: #2F2F37;
 }
 
 .scrolled::-webkit-scrollbar-thumb {
-    background: #8585AD;
+  background: #8585AD;
 }

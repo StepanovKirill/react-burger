@@ -7,7 +7,6 @@ import { TIngredient } from '../../utils/types';
 
 export const BurgerIngredients: React.FunctionComponent = () => {
 
-  // TODO: store typing
   const ingredients: TIngredient[] = useSelector(store => store?.ingredients.ingredients)
 
   // current tab
@@ -44,7 +43,6 @@ export const BurgerIngredients: React.FunctionComponent = () => {
     }
   }
 
-  // TODO: check event typing
   const focusCurrentTab = (e: SyntheticEvent) => {
     if ((refBun && refBun?.current?.offsetHeight) && (e?.currentTarget?.scrollTop - refBun.current.offsetHeight <  0)) {
       setCurrent('bun')

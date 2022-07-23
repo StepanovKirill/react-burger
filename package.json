@@ -1,5 +1,6 @@
 {
   "name": "react-burger",
+  "homepage": "https://stepanovkirill.github.io/react-burger/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -54,7 +55,9 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",
-    "cypress": "cypress open cache clear"
+    "cypress": "cypress open cache clear",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
