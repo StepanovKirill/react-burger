@@ -48,7 +48,7 @@ type TUserStateTypes = {
   updateUserFailed: boolean;
 };
 
-const userInitialState: TUserStateTypes = {
+export const userInitialState: TUserStateTypes = {
   user: null,
   registrationRequest: false,
   registrationFailed: false,

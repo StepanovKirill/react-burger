@@ -7,13 +7,10 @@ import { useSelector } from '../../services/types/hooks';
 
 const AppHeader = () => {
 
-
-  //TODO: Hooks typing
   const isMainPage = useRouteMatch("/")?.isExact;
   const isFeedPage = useRouteMatch("/order-feed")?.isExact;
   const isProfilePage = useRouteMatch("/profile")?.isExact;
 
-  // TODO: store typing
   const userName = useSelector(store => store.user?.user?.name)
   const profile = userName ? userName : "Личный кабинет";
 

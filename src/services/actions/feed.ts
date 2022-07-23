@@ -131,12 +131,12 @@ export const wsOrdersActions: TWsOrdersActions = {
   onClose: WS_CONNECTION_CLOSED_ORDERS,
   onError: WS_CONNECTION_ERROR_ORDERS,
   onOrders: WS_GET_ORDERS,
-  };
+};
   
-  export const wsOrdersUserActions: TWsOrdersUserActions = {
+export const wsOrdersUserActions: TWsOrdersUserActions = {
   wsInit: WS_CONNECTION_START_ORDERS_USER,
   onOpen: WS_CONNECTION_SUCCESS_ORDERS_USER,
   onClose: WS_CONNECTION_CLOSED_ORDERS_USER,
   onError: WS_CONNECTION_ERROR_ORDERS_USER,
   onOrders: WS_GET_ORDERS_USER,
-  };
+};

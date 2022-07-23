@@ -13,6 +13,10 @@ body {
   border-radius: 0;
   background-color: var(--interface-bg);
   overflow: hidden;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
 }
 
 ul {

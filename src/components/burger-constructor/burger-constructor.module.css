@@ -4,6 +4,7 @@
   gap: 16px;
   flex-direction: column;
   padding-top: 100px;
+  background-color: var(--color-interface-bg);
 }
 
 .container {

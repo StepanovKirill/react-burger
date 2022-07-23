@@ -9,14 +9,14 @@ import {
 }
 from '../actions/ingredients';
 
-type TIngredientsStateType = {
+export type TIngredientsStateType = {
   ingredients: TIngredient[];
   ingredientsRequest: boolean;
   ingredientsFailed: boolean;
   currentIngredient: TIngredient | null;
 };
 
-const ingredientsInitialState: TIngredientsStateType = {
+export const ingredientsInitialState: TIngredientsStateType = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
