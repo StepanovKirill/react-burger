@@ -12,7 +12,7 @@
         "standart"
     ],
 
-		"editor.detectIndentation": false,
+    "editor.detectIndentation": false,
 "[typescript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features",
         "editor.tabSize": 2,
@@ -24,5 +24,8 @@
     "editor.insertSpaces": true,
     "editor.detectIndentation":false
 },
-"files.encoding": "utf8"
+"files.encoding": "utf8",
+"jest.autoRun": {
+
+}
 }

@@ -3,6 +3,15 @@
   "homepage": "https://stepanovkirill.github.io/react-burger/",
   "version": "0.1.0",
   "private": true,
+  "jest": {
+    "roots": ["src/"],
+    "collectCoverageFrom": [
+      "**/*test.{js,ts}",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/cypress/**"
+    ]
+  },
   "dependencies": {
     "@babel/preset-flow": "^7.18.6",
     "@types/react-router": "^5.1.18",
@@ -72,9 +81,9 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 5 chrome version",
+      "last 5 firefox version",
+      "last 5 safari version"
     ]
   }
 }

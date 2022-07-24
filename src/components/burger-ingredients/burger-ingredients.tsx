@@ -58,7 +58,7 @@ export const BurgerIngredients: React.FunctionComponent = () => {
     <div className={style.title_container}>
       <p className={`text text_type_main-large ${style.title_text}`}>Соберите бургер</p>
     </div>
-    <div className={style.tab}>
+    <div className={style.tab} data-test="tabs">
       <Tab value="bun" active={current === 'bun'} onClick={scrollToTab}>
         Булки
       </Tab>
