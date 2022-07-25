@@ -19,7 +19,7 @@ type TFeedOrdersState = {
   userOrders: TOrder[];
   };
   
-const feedOrdersInitialState: TFeedOrdersState = {
+export const feedOrdersInitialState: TFeedOrdersState = {
   wsConnected: false,
   orders: [],
   total: 0,

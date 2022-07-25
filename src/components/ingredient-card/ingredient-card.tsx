@@ -9,15 +9,12 @@ import { useLocation, Link } from 'react-router-dom'
 
 export const IngredientCard: FC<{ingredient: TIngredient}> = ({ingredient}) => {
 
-  // TODO: store typing
   const order: TIngredient[] | null = useSelector(store => store.constructor.ingredientsConstructor)
   
-  // TODO: hook typing
   const dispatch = useDispatch()
 
   const location = useLocation<Location>()
   
-  // TODO: hook typing ???
   const [, dragRef] = useDrag({
       type: 'ingredients',
       item: ingredient
@@ -34,7 +31,7 @@ export const IngredientCard: FC<{ingredient: TIngredient}> = ({ingredient}) => {
       onClick={() => {openIngredientsDetail(ingredient._id)}} 
       className={style.link}
     >
-      <div className={style.container} ref={dragRef}>
+      <div className={style.container} ref={dragRef} data-test={ingredient._id}>
         <div className={style.image_container}>
           <img src={ingredient.image} alt={ingredient.name} />
           <div className={style.counter}>

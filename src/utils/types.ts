@@ -11,6 +11,7 @@ export type TIngredient = {
   fat: number;
   carbohydrates: number;
   uid?: string | undefined;
+  __v: number;
 };
 
 export type TUser = {

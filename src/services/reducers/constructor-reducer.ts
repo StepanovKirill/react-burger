@@ -14,7 +14,7 @@ type TConstructorStateType = {
   ingredientsConstructor: Array<TIngredient>
 };
 
-const constructorInitialState: TConstructorStateType = {
+export const constructorInitialState: TConstructorStateType = {
   totalPrice: 0,
   ingredientsConstructor: []
 }

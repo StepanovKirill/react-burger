@@ -7,7 +7,6 @@ import { TIngredient } from '../../utils/types';
 
 export const BurgerIngredients: React.FunctionComponent = () => {
 
-  // TODO: store typing
   const ingredients: TIngredient[] = useSelector(store => store?.ingredients.ingredients)
 
   // current tab
@@ -44,7 +43,6 @@ export const BurgerIngredients: React.FunctionComponent = () => {
     }
   }
 
-  // TODO: check event typing
   const focusCurrentTab = (e: SyntheticEvent) => {
     if ((refBun && refBun?.current?.offsetHeight) && (e?.currentTarget?.scrollTop - refBun.current.offsetHeight <  0)) {
       setCurrent('bun')
@@ -60,7 +58,7 @@ export const BurgerIngredients: React.FunctionComponent = () => {
     <div className={style.title_container}>
       <p className={`text text_type_main-large ${style.title_text}`}>Соберите бургер</p>
     </div>
-    <div className={style.tab}>
+    <div className={style.tab} data-test="tabs">
       <Tab value="bun" active={current === 'bun'} onClick={scrollToTab}>
         Булки
       </Tab>
