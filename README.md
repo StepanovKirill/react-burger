@@ -1,13 +1,8 @@
 ### Проект можно посмотреть по [ссылке](https://stepanovkirill.github.io/react-burger/)
 
-### Проект написан на стеке 
-![TypeScript](https://img.shields.io/badge/-TypeScript-000?&logo=TypeScript)
-![React](https://img.shields.io/badge/-React-000?&logo=React)
-![Redux](https://img.shields.io/badge/-Redux-000?&logo=Redux)
+### Проект написан на стеке ![TypeScript](https://img.shields.io/badge/-TypeScript-000?&logo=TypeScript) ![React](https://img.shields.io/badge/-React-000?&logo=React) ![Redux](https://img.shields.io/badge/-Redux-000?&logo=Redux)
 
-### Тестирование с помощью 
-![Jest](https://img.shields.io/badge/-Jest-000?&logo=Jest)
-![Cyress](https://img.shields.io/badge/-Cypress-000?&logo=Cypress)
+### Тестирование с помощью ![Jest](https://img.shields.io/badge/-Jest-000?&logo=Jest) ![Cyress](https://img.shields.io/badge/-Cypress-000?&logo=Cypress)
 
 ### В проекте реализован следующий функционал:
 
