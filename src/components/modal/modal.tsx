@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react'
+import React, {FC} from 'react'
 import ReactDOM from 'react-dom'
 import style from './modal.module.css'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'

@@ -26,11 +26,10 @@ export const OrderFeedItem: FC<TOrderFeedItem> = ({order, id, isUserOrder}) => {
   
   const orderIngredients = ingredients && order?.ingredients.map((item) => ingredients?.filter(allIngredientItem => allIngredientItem._id === item)[0])
 
-
   const totalPrice = React.useMemo(
     () =>
       orderIngredients ? 
-      orderIngredients.reduce((sum, current) => sum + current.price, 0)
+      orderIngredients.reduce((sum, current) => sum + current?.price, 0)
       : 0,
     [orderIngredients]
   );
@@ -63,11 +62,11 @@ export const OrderFeedItem: FC<TOrderFeedItem> = ({order, id, isUserOrder}) => {
         <ul className={style.icons_container}>
           {hiddenIngredientCount && <IngredientIcon last count={hiddenIngredientCount} imageURL={lastIngredient.image_mobile}/>}
           {showIngredients.map((item, index) => 
-            <IngredientIcon key={index} imageURL={item.image_mobile}/>
+            <IngredientIcon key={index} imageURL={item?.image_mobile}/>
           )}
         </ul>
         <div className={style.total_price}>
-          <p className="text text_type_digits-default">{totalPrice}</p>
+          <p className="text text_type_digits-default">{totalPrice || 0}</p>
           <CurrencyIcon type="primary" />
         </div>
       </div>

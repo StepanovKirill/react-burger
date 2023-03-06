@@ -1,14 +1,12 @@
 export function getCookie(name: string) {
   let matches = document.cookie.match(new RegExp(
+    // eslint-disable-next-line no-useless-escape
     "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
   ));
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-                      // (name: string, value: string, options: {[optionsKey: string]: string} = {}) 
-                      // TODO: typing args
 export function setCookie(name: string, value: string, options: any = {}) {
-
   options = {
     path: '/',
     ...options
