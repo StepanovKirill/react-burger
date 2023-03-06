@@ -4,13 +4,14 @@ import {
   TWsOrdersActions,
   TWsOrdersUserActions,
   WS_CONNECTION_START_ORDERS,
-  WS_CONNECTION_START_ORDERS_USER
-  } from '../actions/feed';
+  WS_CONNECTION_START_ORDERS_USER,
+} from '../actions/feed';
+/* eslint-disable-next-line import/no-cycle */
 import { AppDispatch, RootState } from '../types';
 
-export const socketMiddleware = (wsUrl: string, wsActions: TWsOrdersActions | TWsOrdersUserActions): Middleware => 
-  (store: MiddlewareAPI<AppDispatch, RootState>) => {
-  
+const socketMiddleware = (wsUrl: string, wsActions: TWsOrdersActions | TWsOrdersUserActions): Middleware => (
+  store: MiddlewareAPI<AppDispatch, RootState>,
+) => {
   let socket: WebSocket | null = null;
 
   return (next) => (action) => {

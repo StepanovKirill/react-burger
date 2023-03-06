@@ -1,13 +1,13 @@
-import React, {FC} from 'react'
-import style from './profile-page.module.css'
+import React from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { NavProfile } from '../../components/nav-profile/nav-profile'
-import { ProfileInfo } from '../../components/profile-info/profile-info';
-import { ProfileOrders } from '../../components/profile-orders/profile-orders'
 
-export const ProfilePage: FC = () => {
+import style from './profile-page.module.css';
+import NavProfile from '../../components/nav-profile/nav-profile';
+import ProfileInfo from '../../components/profile-info/profile-info';
+import ProfileOrders from '../../components/profile-orders/profile-orders';
 
-  const {path} = useRouteMatch()
+const ProfilePage: React.FC = () => {
+  const { path } = useRouteMatch();
 
   return (
     <main className={style.profile_wrapper}>
@@ -15,13 +15,15 @@ export const ProfilePage: FC = () => {
         <NavProfile />
         <Switch>
           <Route exact path={`${path}`}>
-            <ProfileInfo/>
+            <ProfileInfo />
           </Route>
           <Route path={`${path}/orders`}>
-            <ProfileOrders/>
+            <ProfileOrders />
           </Route>
         </Switch>
       </div>
     </main>
-  )
-}
+  );
+};
+
+export default ProfilePage;

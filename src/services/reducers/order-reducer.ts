@@ -1,11 +1,12 @@
+// eslint-disable-next-line import/no-cycle
 import {
-  POST_ORDER_REQUEST, 
-  POST_ORDER_SUCCESS, 
+  POST_ORDER_REQUEST,
+  POST_ORDER_SUCCESS,
   POST_ORDER_FAILED,
   CLOSE_ORDER,
   RESET_ORDER_NUMBER,
-  TOrderActions
-} from '../actions/order'
+  TOrderActions,
+} from '../actions/order';
 
 type TOrderState = {
   orderNumber: number | null;
@@ -17,45 +18,46 @@ export const orderInitialState = {
   orderNumber: null,
   orderRequest: false,
   orderFailed: false,
-}
+};
 
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export const orderReducer = (state: TOrderState = orderInitialState, action: TOrderActions): TOrderState => {
   switch (action.type) {
     case POST_ORDER_REQUEST: {
-      return ({
+      return {
         ...state,
-        orderRequest: true
-      })
+        orderRequest: true,
+      };
     }
     case POST_ORDER_SUCCESS: {
-      return ({
+      return {
         ...state,
         orderRequest: false,
         orderNumber: action.orderNumber,
-        orderFailed: false
-      })
+        orderFailed: false,
+      };
     }
     case POST_ORDER_FAILED: {
-      return ({
+      return {
         ...state,
         orderRequest: false,
-        orderFailed: true
-      })
+        orderFailed: true,
+      };
     }
     case CLOSE_ORDER: {
       return {
-          ...state,
-          orderNumber: null
-      }
+        ...state,
+        orderNumber: null,
+      };
     }
     case RESET_ORDER_NUMBER: {
       return {
         ...state,
-        orderNumber: null
-      }
+        orderNumber: null,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};

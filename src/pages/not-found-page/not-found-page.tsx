@@ -1,14 +1,15 @@
-import React, { FC } from "react"
-import style from '../index.module.css'
+import React from 'react';
 
-export const NotFoundPage: FC= () => {
-  return (
-    <main className={style.wrapper}>
-      <div className={style.container}>
-        <div className={style.title}>
-          <p className='text text_type_main-medium'>Упс... Страница не найдена</p>
-        </div>
+import style from '../index.module.css';
+
+const NotFoundPage: React.FC = () => (
+  <main className={style.wrapper}>
+    <div className={style.container}>
+      <div className={style.title}>
+        <p className="text text_type_main-medium">Упс... Страница не найдена</p>
       </div>
-    </main>
-  )
-}
+    </div>
+  </main>
+);
+
+export default NotFoundPage;
