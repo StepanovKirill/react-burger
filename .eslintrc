@@ -8,9 +8,12 @@
     "plugin:react/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:react-perf/recommended",
     "prettier"
   ],
-  "plugins": ["react", "react-hooks"],
+  "plugins": ["react", "react-hooks", "jsx-a11y"],
   "parserOptions": {
     "project": "./tsconfig.json",
     "ecmaFeatures": {
@@ -40,6 +43,6 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "no-console": ["warn", { "allow": ["warn", "error"] }],
-    "no-restricted-imports": ["warn"]
+    "no-restricted-imports": ["warn", "styled-components"]
   }
 }
