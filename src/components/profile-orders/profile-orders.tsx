@@ -16,7 +16,7 @@ export function ProfileOrders() {
         return () => {
         dispatch(wsConnectionClosedOrdersUserAction());
       };
-    }, []
+    }, [dispatch]
   );
 
   return (

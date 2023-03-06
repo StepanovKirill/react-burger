@@ -37,7 +37,7 @@ export const OrderPage: React.FC = () => {
         return () => {
         dispatch(isUserOrders ? wsConnectionClosedOrdersUserAction() : wsConnectionClosedOrdersAction());
       };
-    }, [profileOrderNumber, feedOrderNumber]
+    }, [profileOrderNumber, feedOrderNumber, dispatch, isUserOrders]
   );
     
   return (
