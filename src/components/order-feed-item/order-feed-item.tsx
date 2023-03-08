@@ -39,12 +39,13 @@ const OrderFeedItem: React.FC<TOrderFeedItem> = ({ order, id, isUserOrder }) => 
   const lastIngredient = orderIngredients?.slice(4, 5)[0];
   const hiddenIngredientCount = orderIngredients.length > 5 ? orderIngredients.length - 5 : null;
 
+  const path = React.useMemo(() => ({ pathname: `${location.pathname}/${id}`, state: { background: location } }), [
+    location,
+    id,
+  ]);
+
   return (
-    // eslint-disable-next-line react-perf/jsx-no-new-object-as-prop
-    <Link
-      to={{ pathname: `${location.pathname}/${id}`, state: { background: location } }}
-      className={style.item_container}
-    >
+    <Link to={path} className={style.item_container}>
       <div className={style.info_container}>
         <div>
           <p className="text text_type_digits-default">#{order.number}</p>
