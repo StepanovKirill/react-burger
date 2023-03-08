@@ -6,4 +6,5 @@ import { RootState, AppDispatch, AppThunk } from './index';
 export const useSelector: TypedUseSelectorHook<RootState> = useSelectorOrigin;
 
 // typed useDispatch hook
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const useDispatch = () => useDispatchOrigin<AppDispatch | AppThunk>();

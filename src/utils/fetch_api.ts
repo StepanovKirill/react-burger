@@ -19,8 +19,10 @@ const checkResponse = (response: Response) => {
   return Promise.reject(response.status);
 };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getIngredientsRequest = () => fetch(INGREDIENT_API).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const postOrderRequest = (ingredients: { ingredients: string[] }) =>
   fetch(ORDER_API, {
     method: 'POST',
@@ -31,6 +33,7 @@ export const postOrderRequest = (ingredients: { ingredients: string[] }) =>
     body: JSON.stringify({ ingredients }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const registrationUserRequest = (email: string, password: string, name: string) =>
   fetch(REGISTRATION_USER_API, {
     method: 'POST',
@@ -44,6 +47,7 @@ export const registrationUserRequest = (email: string, password: string, name: s
     }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const forgotPasswordRequest = (email: string) =>
   fetch(FORGOT_PASSWORD_API, {
     method: 'POST',
@@ -55,6 +59,7 @@ export const forgotPasswordRequest = (email: string) =>
     }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const resetPasswordRequest = (password: string, code: string) =>
   fetch(RESET_PASSWORD_API, {
     method: 'POST',
@@ -67,6 +72,7 @@ export const resetPasswordRequest = (password: string, code: string) =>
     }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const loginRequest = (email: string, password: string) =>
   fetch(LOGIN_API, {
     method: 'POST',
@@ -79,6 +85,7 @@ export const loginRequest = (email: string, password: string) =>
     }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const logoutRequest = () =>
   fetch(LOGOUT_API, {
     method: 'POST',
@@ -88,6 +95,7 @@ export const logoutRequest = () =>
     body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const refreshTokenRequest = () =>
   fetch(REFRESH_TOKEN_API, {
     method: 'POST',
@@ -97,6 +105,7 @@ export const refreshTokenRequest = () =>
     body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getUserRequest = () =>
   fetch(GET_USER_API, {
     method: 'GET',
@@ -106,6 +115,7 @@ export const getUserRequest = () =>
     },
   }).then(checkResponse);
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const updateUserRequest = (email: string, name: string) =>
   fetch(UPDATE_USER_API, {
     method: 'PATCH',

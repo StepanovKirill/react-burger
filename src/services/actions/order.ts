@@ -31,26 +31,25 @@ export interface ICloseOrder {
 
 export type TOrderActions = IPostOrderRequest | IPostOrderSuccess | IPostOrderFailed | IResetOrderNumber | ICloseOrder;
 
-export const postOrder: AppThunk = (ingredients: { ingredients: string[] }) =>
-  function (dispatch: AppDispatch) {
-    dispatch({
-      type: POST_ORDER_REQUEST,
-    });
+export const postOrder: AppThunk = (ingredients: { ingredients: string[] }) => (dispatch: AppDispatch) => {
+  dispatch({
+    type: POST_ORDER_REQUEST,
+  });
 
-    postOrderRequest(ingredients)
-      .then((response) => {
-        dispatch({
-          type: POST_ORDER_SUCCESS,
-          orderNumber: response.order.number,
-        });
-      })
-      .catch((e) => {
-        console.error(e);
-        dispatch({
-          type: POST_ORDER_FAILED,
-        });
+  postOrderRequest(ingredients)
+    .then((response) => {
+      dispatch({
+        type: POST_ORDER_SUCCESS,
+        orderNumber: response.order.number,
       });
-  };
+    })
+    .catch((e) => {
+      console.error(e);
+      dispatch({
+        type: POST_ORDER_FAILED,
+      });
+    });
+};
 
 export const closeModalOrder = (): ICloseOrder => ({
   type: CLOSE_ORDER,
