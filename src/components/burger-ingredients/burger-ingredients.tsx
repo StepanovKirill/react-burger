@@ -47,13 +47,13 @@ const BurgerIngredients: React.FunctionComponent = () => {
     if (
       refBun &&
       refBun?.current?.offsetHeight &&
-      (e?.currentTarget?.scrollTop || 0 - refBun.current.offsetHeight < 0)
+      Number(e?.currentTarget?.scrollTop) - refBun.current.offsetHeight < 0
     ) {
       setCurrent('bun');
     } else if (
       refSauces?.current?.offsetHeight &&
       refBun?.current?.offsetHeight &&
-      (e?.currentTarget?.scrollTop || 0 - refSauces.current.offsetHeight - refBun.current.offsetHeight < 0)
+      Number(e?.currentTarget?.scrollTop) - refSauces.current.offsetHeight - refBun.current.offsetHeight < 0
     ) {
       setCurrent('sauce');
     } else {
