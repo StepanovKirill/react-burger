@@ -8,9 +8,14 @@ import { wsOrdersUserActions, wsOrdersActions } from './actions/feed';
 
 const WS_URL = 'wss://norma.nomoreparties.space/orders';
 
+interface ObjectWithKeys {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+
 const composeEnhancers =
-  typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+  typeof window === 'object' && (window as ObjectWithKeys).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? (window as ObjectWithKeys).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
     : compose;
 
 const enhancer = composeEnhancers(

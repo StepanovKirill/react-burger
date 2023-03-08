@@ -5,10 +5,10 @@ export function getCookie(name: string): string | undefined {
       `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`,
     ),
   );
-  console.log(matches);
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function setCookie(name: string, value: string, options: any = {}): void {
   const newOptions = {
     path: '/',
