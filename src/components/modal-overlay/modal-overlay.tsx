@@ -1,8 +1,8 @@
-import React, {FC} from 'react';
+import React from 'react';
 import style from './modal-overlay.module.css';
 
-export const ModalOverlay: FC<{onClose: () => void}>= ({onClose}) => {
-  return (
-    <div className={style.modalOverlay} onClick={onClose}></div>
-  )
-}
+const ModalOverlay: React.FC<{ onClose: () => void }> = ({ onClose }) => (
+  <button type="button" className={style.modalOverlay} onClick={onClose} />
+);
+
+export default ModalOverlay;

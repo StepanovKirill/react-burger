@@ -1,27 +1,36 @@
-import React from "react";
-import { useSelector } from "../../services/types/hooks";
+import React from 'react';
+import { v4 as uuid } from 'uuid';
+
+import { useSelector } from '../../services/types/hooks';
 import style from './order-board.module.css';
 
-export const OrderBoard = () => {
-  
-  const { total, totalToday, orders } = useSelector((store) => store.feed)
+export default function OrderBoard(): JSX.Element {
+  const { total, totalToday, orders } = useSelector((store) => store.feed);
 
-  const doneOrders = orders.filter((item) => item.status === "done").slice(0, 10)
-  const executeOrders = orders.filter((item) => item.status === "pending").slice(0, 10)
- 
+  const doneOrders = orders.filter((item) => item.status === 'done').slice(0, 10);
+  const executeOrders = orders.filter((item) => item.status === 'pending').slice(0, 10);
+
   return (
     <div className={style.wrapper}>
       <div className={style.status_container}>
         <div className={style.title_container}>
           <p className="text text_type_main-medium">Готовы:</p>
           <ul className={style.two_column}>
-            {doneOrders?.map((item, index) => <li key={index} className={style.ready}>{item.number}</li>)}
+            {doneOrders?.map((item) => (
+              <li key={uuid()} className={style.ready}>
+                {item.number}
+              </li>
+            ))}
           </ul>
         </div>
         <div className={style.title_container}>
           <p className="text text_type_main-medium">В работе:</p>
           <ul className={style.two_column}>
-            {executeOrders?.map((item, index) => <li key={index} className={style.execute}>{item.number}</li>)}
+            {executeOrders?.map((item) => (
+              <li key={uuid()} className={style.execute}>
+                {item.number}
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -34,5 +43,5 @@ export const OrderBoard = () => {
         <p className={style.total}>{totalToday}</p>
       </div>
     </div>
-  )
+  );
 }

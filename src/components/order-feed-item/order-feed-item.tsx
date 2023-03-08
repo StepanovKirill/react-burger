@@ -1,12 +1,14 @@
-import React, {FC} from "react";
-import { useSelector } from "../../services/types/hooks";
-import style from './order-feed-item.module.css';
-import { TOrder } from "../../utils/types";
-import { IngredientIcon } from "../ingredient-icon/ingredient-icon";
-import { formatData } from '../../utils/format-data';
+import React from 'react';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Link, useLocation } from "react-router-dom";
-import { Location } from 'history'
+import { Link, useLocation } from 'react-router-dom';
+import { Location } from 'history';
+import { v4 as uuid } from 'uuid';
+
+import { useSelector } from '../../services/types/hooks';
+import style from './order-feed-item.module.css';
+import { TOrder } from '../../utils/types';
+import IngredientIcon from '../ingredient-icon/ingredient-icon';
+import formatData from '../../utils/format-data';
 
 type TOrderFeedItem = {
   order: TOrder;
@@ -17,53 +19,57 @@ type TOrderFeedItem = {
 const ordersStatus = {
   created: 'Создан',
   pending: 'Готовится',
-  done: 'Выполнен'
-}
+  done: 'Выполнен',
+};
 
-export const OrderFeedItem: FC<TOrderFeedItem> = ({order, id, isUserOrder}) => {
+const OrderFeedItem: React.FC<TOrderFeedItem> = ({ order, id, isUserOrder }) => {
   const location = useLocation<Location>();
-  const { ingredients } = useSelector(store => store.ingredients)
-  
-  const orderIngredients = ingredients && order?.ingredients.map((item) => ingredients?.filter(allIngredientItem => allIngredientItem._id === item)[0])
+  const { ingredients } = useSelector((store) => store.ingredients);
+
+  const orderIngredients =
+    ingredients &&
+    order?.ingredients.map((item) => ingredients?.filter((allIngredientItem) => allIngredientItem._id === item)[0]);
 
   const totalPrice = React.useMemo(
-    () =>
-      orderIngredients ? 
-      orderIngredients.reduce((sum, current) => sum + current?.price, 0)
-      : 0,
-    [orderIngredients]
+    () => (orderIngredients ? orderIngredients.reduce((sum, current) => sum + (current?.price || 0), 0) : 0),
+    [orderIngredients],
   );
 
   const showIngredients = orderIngredients?.slice(0, 4);
-  const lastIngredient = orderIngredients?.slice(4,5)[0];
+  const lastIngredient = orderIngredients?.slice(4, 5)[0];
   const hiddenIngredientCount = orderIngredients.length > 5 ? orderIngredients.length - 5 : null;
+
+  const path = React.useMemo(() => ({ pathname: `${location.pathname}/${id}`, state: { background: location } }), [
+    location,
+    id,
+  ]);
+
   return (
-    <Link
-      to={{ pathname: `${location.pathname}/${id}`, state: { background: location } }}
-      className={style.item_container}
-    >
+    <Link to={path} className={style.item_container}>
       <div className={style.info_container}>
         <div>
-          <p className="text text_type_digits-default">
-            #{order.number}
-          </p>
+          <p className="text text_type_digits-default">#{order.number}</p>
         </div>
         <div className={style.date_container}>
-          <p className="text text_type_main-default text_color_inactive">
-            {formatData(order.createdAt)}
-          </p>
-        </div>  
+          <p className="text text_type_main-default text_color_inactive">{formatData(order.createdAt)}</p>
+        </div>
       </div>
       <div className={`${style.title_container} text text_type_main-medium`}>
         {order.name}
-        {isUserOrder && <p className={`${style.order_status} ${(order.status === 'done') && style.done}`}>{ordersStatus[order.status]}</p>}
+        {isUserOrder && (
+          <p className={`${style.order_status} ${order.status === 'done' && style.done}`}>
+            {ordersStatus[order.status]}
+          </p>
+        )}
       </div>
       <div className={style.ingredients_container}>
         <ul className={style.icons_container}>
-          {hiddenIngredientCount && <IngredientIcon last count={hiddenIngredientCount} imageURL={lastIngredient.image_mobile}/>}
-          {showIngredients.map((item, index) => 
-            <IngredientIcon key={index} imageURL={item?.image_mobile}/>
+          {hiddenIngredientCount && (
+            <IngredientIcon last count={hiddenIngredientCount} imageURL={lastIngredient.image_mobile} />
           )}
+          {showIngredients.map((item) => (
+            <IngredientIcon key={uuid()} imageURL={item?.image_mobile} />
+          ))}
         </ul>
         <div className={style.total_price}>
           <p className="text text_type_digits-default">{totalPrice || 0}</p>
@@ -71,5 +77,7 @@ export const OrderFeedItem: FC<TOrderFeedItem> = ({order, id, isUserOrder}) => {
         </div>
       </div>
     </Link>
-  )
+  );
 };
+
+export default OrderFeedItem;

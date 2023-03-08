@@ -1,51 +1,54 @@
-import React, {FC} from 'react'
-import { useDrag } from 'react-dnd'
-import { TIngredient } from '../../utils/types'
-import style from'./ingredient-card.module.css'
-import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components'
+import React from 'react';
+import { useDrag } from 'react-dnd';
+import { useLocation, Link } from 'react-router-dom';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+
+import { TIngredient } from '../../utils/types';
+import style from './ingredient-card.module.css';
 import { useSelector, useDispatch } from '../../services/types/hooks';
-import { openModalIngredient } from '../../services/actions/ingredients'
-import { useLocation, Link } from 'react-router-dom'
+import { openModalIngredient } from '../../services/actions/ingredients';
 
-export const IngredientCard: FC<{ingredient: TIngredient}> = ({ingredient}) => {
+const IngredientCard: React.FC<{ ingredient: TIngredient }> = ({ ingredient }) => {
+  const order: TIngredient[] | null = useSelector((store) => store.constructor.ingredientsConstructor);
 
-  const order: TIngredient[] | null = useSelector(store => store.constructor.ingredientsConstructor)
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const location = useLocation<Location>()
-  
+  const location = useLocation<Location>();
+
   const [, dragRef] = useDrag({
-      type: 'ingredients',
-      item: ingredient
-  })
+    type: 'ingredients',
+    item: ingredient,
+  });
 
-  const openIngredientsDetail = (ingredientID: string) => {
-    dispatch(openModalIngredient(ingredientID))
-  }
-  const count = order?.filter((item: TIngredient) => item._id === ingredient._id).length
+  const openIngredientsDetail = React.useCallback(
+    (ingredientID: string) => {
+      dispatch(openModalIngredient(ingredientID));
+    },
+    [dispatch],
+  );
+
+  const handleOpenDetail = React.useCallback(() => openIngredientsDetail, [openIngredientsDetail]);
+
+  const path = React.useMemo(() => ({ pathname: `/ingredients/${ingredient._id}`, state: { background: location } }), [
+    ingredient._id,
+    location,
+  ]);
+
+  const count = order?.filter((item: TIngredient) => item._id === ingredient._id).length;
 
   return (
-    <Link 
-      to={{ pathname: `/ingredients/${ingredient._id}`, state: {background: location} }}
-      onClick={() => {openIngredientsDetail(ingredient._id)}} 
-      className={style.link}
-    >
+    <Link to={path} onClick={handleOpenDetail} className={style.link}>
       <div className={style.container} ref={dragRef} data-test={ingredient._id}>
         <div className={style.image_container}>
           <img src={ingredient.image} alt={ingredient.name} />
-          <div className={style.counter}>
-            {count > 0 && <Counter count={count} size="default" />}
-          </div>
+          <div className={style.counter}>{count > 0 && <Counter count={count} size="default" />}</div>
         </div>
         <div className={style.price_container}>
           <div className={style.price_value}>
-            <p className="text text_type_digits-default">
-              {ingredient.price}
-            </p>
+            <p className="text text_type_digits-default">{ingredient.price}</p>
           </div>
           <div className={style.icon}>
-            <CurrencyIcon type='primary'/>
+            <CurrencyIcon type="primary" />
           </div>
         </div>
         <div className={style.name_container}>
@@ -54,4 +57,6 @@ export const IngredientCard: FC<{ingredient: TIngredient}> = ({ingredient}) => {
       </div>
     </Link>
   );
-}
+};
+
+export default IngredientCard;

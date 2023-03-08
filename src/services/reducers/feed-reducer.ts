@@ -8,7 +8,7 @@ import {
   WS_CONNECTION_SUCCESS_ORDERS_USER,
   WS_CONNECTION_CLOSED_ORDERS_USER,
   WS_CONNECTION_ERROR_ORDERS_USER,
-  WS_GET_ORDERS_USER
+  WS_GET_ORDERS_USER,
 } from '../actions/feed';
 
 type TFeedOrdersState = {
@@ -17,8 +17,8 @@ type TFeedOrdersState = {
   total: number;
   totalToday: number;
   userOrders: TOrder[];
-  };
-  
+};
+
 export const feedOrdersInitialState: TFeedOrdersState = {
   wsConnected: false,
   orders: [],
@@ -27,6 +27,7 @@ export const feedOrdersInitialState: TFeedOrdersState = {
   userOrders: [],
 };
 
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export const feedOrdersReducer = (state = feedOrdersInitialState, action: TFeedOrdersActions): TFeedOrdersState => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS_ORDERS: {
@@ -76,7 +77,7 @@ export const feedOrdersReducer = (state = feedOrdersInitialState, action: TFeedO
     case WS_GET_ORDERS_USER: {
       return {
         ...state,
-        userOrders: action.orders.orders
+        userOrders: action.orders.orders,
       };
     }
     default: {

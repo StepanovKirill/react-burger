@@ -1,4 +1,5 @@
 import { TUser } from '../../utils/types';
+// eslint-disable-next-line import/no-cycle
 import {
   FORGOT_PASSWORD_REQUEST,
   FORGOT_PASSWORD_SUCCESS,
@@ -24,7 +25,7 @@ import {
   REFRESH_TOKEN_FAILED,
   REFRESH_TOKEN_REQUEST,
   REFRESH_TOKEN_SUCCESS,
-  TUserActions
+  TUserActions,
 } from '../actions/user';
 
 type TUserStateTypes = {
@@ -66,9 +67,10 @@ export const userInitialState: TUserStateTypes = {
   getUserRequest: false,
   getUserFailed: false,
   updateUserRequest: false,
-  updateUserFailed: false
+  updateUserFailed: false,
 };
 
+// eslint-disable-next-line @typescript-eslint/default-param-last
 export const userReducer = (state: TUserStateTypes = userInitialState, action: TUserActions): TUserStateTypes => {
   switch (action.type) {
     case REGISTRATION_REQUEST: {
@@ -76,7 +78,7 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         ...state,
         registrationRequest: true,
         registrationFailed: false,
-      }
+      };
     }
     case REGISTRATION_SUCCESS: {
       return {
@@ -85,63 +87,63 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         registrationFailed: false,
         user: action.user,
         isLogged: true,
-      }
+      };
     }
     case REGISTRATION_FAILED: {
       return {
         ...state,
         registrationRequest: false,
-        registrationFailed: true,     
-      }
+        registrationFailed: true,
+      };
     }
     case FORGOT_PASSWORD_REQUEST: {
       return {
         ...state,
         forgotPasswordRequest: true,
         forgotPasswordFailed: false,
-      }
+      };
     }
     case FORGOT_PASSWORD_SUCCESS: {
       return {
         ...state,
         forgotPasswordFailed: false,
-        forgotPasswordRequest: false
-      }
+        forgotPasswordRequest: false,
+      };
     }
     case FORGOT_PASSWORD_FAILED: {
       return {
         ...state,
         forgotPasswordFailed: true,
-        forgotPasswordRequest: false
-      }
+        forgotPasswordRequest: false,
+      };
     }
     case RESET_PASSWORD_REQUEST: {
       return {
         ...state,
         resetPasswordRequest: true,
-        resetPasswordFailed: false
-      }
+        resetPasswordFailed: false,
+      };
     }
     case RESET_PASSWORD_SUCCESS: {
       return {
         ...state,
         resetPasswordRequest: false,
-        resetPasswordFailed: false
-      }
+        resetPasswordFailed: false,
+      };
     }
     case RESET_PASSWORD_FAILED: {
       return {
         ...state,
         resetPasswordRequest: false,
-        resetPasswordFailed: true
-      }
+        resetPasswordFailed: true,
+      };
     }
     case LOGIN_REQUEST: {
       return {
         ...state,
         loginRequest: true,
         loginFailed: false,
-      }
+      };
     }
     case LOGIN_SUCCESS: {
       return {
@@ -149,22 +151,22 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         loginRequest: false,
         loginFailed: false,
         user: action.user,
-        isLogged: true
-      }
+        isLogged: true,
+      };
     }
     case LOGIN_FAILED: {
       return {
         ...state,
         loginRequest: false,
-        loginFailed: true
-      }
+        loginFailed: true,
+      };
     }
     case LOGOUT_REQUEST: {
       return {
         ...state,
         logoutRequest: true,
-        logoutFailed: false
-      }
+        logoutFailed: false,
+      };
     }
     case LOGOUT_SUCCESS: {
       return {
@@ -172,23 +174,23 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         logoutRequest: false,
         logoutFailed: false,
         isLogged: false,
-        user: null
-      }
+        user: null,
+      };
     }
     case LOGOUT_FAILED: {
       return {
         ...state,
         logoutFailed: true,
-        logoutRequest: false
-      }
+        logoutRequest: false,
+      };
     }
     case GET_USER_REQUEST: {
       return {
         ...state,
         getUserRequest: true,
         getUserFailed: false,
-        isLogged: false
-      }
+        isLogged: false,
+      };
     }
     case GET_USER_SUCCESS: {
       return {
@@ -196,8 +198,8 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         getUserRequest: false,
         getUserFailed: false,
         user: action.user,
-        isLogged: true
-      }
+        isLogged: true,
+      };
     }
     case GET_USER_FAILED: {
       return {
@@ -205,54 +207,54 @@ export const userReducer = (state: TUserStateTypes = userInitialState, action: T
         getUserFailed: true,
         getUserRequest: false,
         user: null,
-        isLogged: false
-      }
+        isLogged: false,
+      };
     }
     case REFRESH_TOKEN_REQUEST: {
       return {
         ...state,
         refreshTokenRequest: true,
-        refreshTokenFailed: false
-      }
+        refreshTokenFailed: false,
+      };
     }
     case REFRESH_TOKEN_SUCCESS: {
       return {
         ...state,
         refreshTokenRequest: false,
-        refreshTokenFailed: false
-      }
+        refreshTokenFailed: false,
+      };
     }
     case REFRESH_TOKEN_FAILED: {
       return {
         ...state,
         refreshTokenFailed: true,
-        refreshTokenRequest: false
-      }
+        refreshTokenRequest: false,
+      };
     }
     case UPDATE_USER_REQUEST: {
       return {
-        ...state, 
+        ...state,
         updateUserRequest: true,
-        updateUserFailed: false
-      }
+        updateUserFailed: false,
+      };
     }
     case UPDATE_USER_SUCCESS: {
       return {
-        ...state, 
+        ...state,
         updateUserRequest: false,
         updateUserFailed: false,
-        user: action.user
-      }
+        user: action.user,
+      };
     }
     case UPDATE_USER_FAILED: {
       return {
-        ...state, 
+        ...state,
         updateUserRequest: false,
-        updateUserFailed: true
-      }
+        updateUserFailed: true,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};

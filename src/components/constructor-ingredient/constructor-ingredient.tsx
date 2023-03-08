@@ -1,8 +1,9 @@
-import React, {FC} from "react";
+import React, { FC } from 'react';
 import { useDrop, useDrag } from 'react-dnd';
-import style from './constructor-ingredient.module.css';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { TIngredient } from "../../utils/types";
+
+import style from './constructor-ingredient.module.css';
+import { TIngredient } from '../../utils/types';
 
 type TConstructorIngredient = {
   item: TIngredient;
@@ -11,55 +12,54 @@ type TConstructorIngredient = {
   index: number;
 };
 
-export const ConstructorIngredient: FC<TConstructorIngredient> = ({item, onDelete, onMove, index}) => {
-  
+const ConstructorIngredient: FC<TConstructorIngredient> = ({ item, onDelete, onMove, index }) => {
   // ref
   const ref = React.useRef(null);
-  
-  // TODO: useDrag typing???? 
+
   // on drag current element
   const [, dragRef] = useDrag({
     type: 'ingredient',
-    item: {index}
+    item: { index },
   });
 
-  // TODO: useDrop typing???
   // on drop
   const [, dropTarget] = useDrop({
-    accept: "ingredient",
-    hover: (item: {index: number}) => {
+    accept: 'ingredient',
+    hover: (hoverItem: { index: number }) => {
       // index - is target index (current hover) of element in source array
       // item.index - is source index (current draggable) of element in source array
-      const sourceIndex = item.index;
+      const sourceIndex = hoverItem.index;
       const targetIndex = index;
-      
+
       if (targetIndex === sourceIndex) return;
-      
+
       onMove(targetIndex, sourceIndex);
-      
+
       // after moving reassign target index for current element
-      item.index = targetIndex;
-    }
+      // eslint-disable-next-line no-param-reassign
+      hoverItem.index = targetIndex;
+    },
   });
 
   dragRef(dropTarget(ref));
 
+  const onCloseHandler = React.useCallback(() => {
+    onDelete(item.uid);
+  }, [onDelete, item.uid]);
+
   return (
-    <div 
-      className={style.item_container}
-      draggable
-      ref={ref}
-    >
-      <DragIcon type="primary"/>
+    <div className={style.item_container} draggable ref={ref}>
+      <DragIcon type="primary" />
       <ConstructorElement
         key={item.uid}
         text={item.name}
         isLocked={false}
         price={item.price}
         thumbnail={item.image}
-        handleClose={() => {
-          onDelete(item.uid)}}
+        handleClose={onCloseHandler}
       />
     </div>
-  )
+  );
 };
+
+export default ConstructorIngredient;

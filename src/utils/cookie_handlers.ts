@@ -1,36 +1,39 @@
-export function getCookie(name: string) {
-  let matches = document.cookie.match(new RegExp(
-    // eslint-disable-next-line no-useless-escape
-    "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-  ));
+export function getCookie(name: string): string | undefined {
+  const matches = document.cookie.match(
+    new RegExp(
+      // eslint-disable-next-line no-useless-escape
+      `(?:^|; )${name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1')}=([^;]*)`,
+    ),
+  );
+  console.log(matches);
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function setCookie(name: string, value: string, options: any = {}) {
-  options = {
+export function setCookie(name: string, value: string, options: any = {}): void {
+  const newOptions = {
     path: '/',
-    ...options
+    ...options,
   };
 
   if (options.expires instanceof Date) {
-    options.expires = options.expires.toUTCString();
+    newOptions.expires = options.expires.toUTCString();
   }
 
-  let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+  let updatedCookie = `${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
 
-  for (let optionKey in options) {
-    updatedCookie += "; " + optionKey;
-    let optionValue = options[optionKey];
+  const optionKeys = Object.keys(newOptions);
+  optionKeys.forEach((optionKey) => {
+    updatedCookie += `;${optionKey}`;
+    const optionValue = newOptions[optionKey];
     if (optionValue !== true) {
-      updatedCookie += "=" + optionValue;
+      updatedCookie += `=${optionValue}`;
     }
-  }
-
+  });
   document.cookie = updatedCookie;
 }
 
-export function deleteCookie(name: string) {
-  setCookie(name, "", {
-    'max-age': -1
-  })
+export function deleteCookie(name: string): void {
+  setCookie(name, '', {
+    'max-age': -1,
+  });
 }
