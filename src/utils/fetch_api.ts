@@ -1,6 +1,6 @@
 import { getCookie } from './cookie_handlers';
 
-const URL_API = 'https://norma.nomoreparties.space/api/';
+const URL_API = 'https://norma.education-services.ru/api/';
 const INGREDIENT_API = `${URL_API}ingredients`;
 const ORDER_API = `${URL_API}orders`;
 const REGISTRATION_USER_API = `${URL_API}auth/register`;
