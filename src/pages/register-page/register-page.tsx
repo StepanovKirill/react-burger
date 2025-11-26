@@ -53,7 +53,7 @@ export default function RegisterPage(): JSX.Element {
             />
             <PasswordInput value={password} onChange={onChangePassword} name="" />
           </div>
-          <Button type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Зарегистрироваться
           </Button>
         </form>

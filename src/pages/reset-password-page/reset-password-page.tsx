@@ -54,7 +54,7 @@ export default function ResetPasswordPage(): JSX.Element {
             <Input type="password" placeholder="Введите новый пароль" value={newPassword} onChange={onChangePassword} />
             <Input placeholder="Введите код из письма" value={code} onChange={onChangeCode} />
           </div>
-          <Button type="primary" size="medium">
+          <Button htmlType="submit" type="primary" size="medium">
             Сохранить
           </Button>
         </form>

@@ -76,11 +76,11 @@ export default function ProfileInfo(): JSX.Element {
           />
           <PasswordInput value={password} onChange={onChangePassword} name="" />
         </div>
-        <Button type="primary" size="medium" disabled={!isChange}>
+        <Button htmlType="submit" type="primary" size="medium" disabled={!isChange}>
           Сохранить
         </Button>
       </form>
-      <Button type="secondary" size="medium" disabled={!isChange} onClick={resetUserInfo}>
+      <Button htmlType="reset" type="secondary" size="medium" disabled={!isChange} onClick={resetUserInfo}>
         Отмена
       </Button>
     </>

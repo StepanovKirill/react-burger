@@ -169,6 +169,7 @@ const BurgerConstructor: FC = () => {
           <CurrencyIcon type="primary" />
         </div>
         <Button
+          htmlType="button"
           type="primary"
           size="large"
           onClick={makeOrder}
